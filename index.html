@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaleoTrunfo: A Jornada dos Gigantes</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sage: {
+              50: '#f4f7f4',
+              100: '#e5ece5',
+              200: '#cbdacb',
+              300: '#a3c0a4',
+              500: '#69946b',
+              700: '#476749',
+              900: '#2d422f',
+            },
+            pastelBlue: '#E6F0FA',
+            pastelSand: '#FAF6EE',
+            pastelLilac: '#F3EDF8',
+            pastelAmber: '#FDF6E2',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Estilos focados em suavidade sensorial e previsibilidade */
+    body {
+      background-color: #F8FAF8;
+      color: #2D3748;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Transições suaves e discretas */
+    .gentle-transition {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Leve animação de respiração para vitória gentil */
+    @keyframes gentlePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    .win-gentle {
+      animation: gentlePulse 0.8s ease-in-out;
+    }
+
+    /* Balanço sutil para feedback de não-vitória */
+    @keyframes gentleNod {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+    .try-gentle {
+      animation: gentleNod 0.5s ease-in-out;
+    }
+
+    /* Imagem realista com transição e proteção contra distorção */
+    .card-real-img {
+      object-fit: contain;
+      object-position: center;
+      transition: transform 0.4s ease, filter 0.3s ease;
+      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.15));
+    }
+    .card-real-img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.22));
+    }
+
+    /* Barra de rolagem suave e discreta */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F2;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBDACB;
+      border-radius: 9999px;
+    }
+
+    /* Estilo para a caixa da imagem artística realista: fundo neutro/estúdio de exposição */
+    .paleo-art-box {
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, #ffffff 40%, #f1f5f2 100%);
+      border: 1.5px solid rgba(105, 148, 107, 0.25);
+      border-radius: 1rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 145px;
+      padding: 0.5rem;
+    }
+    .paleo-art-box svg {
+      filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.12));
+      transition: transform 0.3s ease;
+    }
+    .paleo-art-box:hover svg {
+      transform: scale(1.04);
+    }
+
+    /* Esconde elementos visualmente sem prejudicar leitores de tela */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased selection:bg-sage-200">
+
+  <!-- BARRA DE TOPO FIXA E LIMPA -->
+  <header class="bg-white/90 backdrop-blur border-b border-sage-200 sticky top-0 z-40 px-4 py-3 shadow-xs">
+    <div class="max-w-4xl mx-auto flex items-center justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <!-- Ícone amigável de Fóssil em SVG -->
+        <div class="w-10 h-10 rounded-2xl bg-sage-100 flex items-center justify-center text-sage-700 shadow-inner shrink-0">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-3c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v3zm-4-3c0 .83-.67 1.5-1.5 1.5S6 14.33 6 13.5v-2C6 10.67 6.67 10 7.5 10S9 10.67 9 11.5v2zm8 0c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-2c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v2zm-2.5-6c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-1c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v1z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-lg md:text-xl font-bold tracking-tight text-sage-900 leading-tight">PaleoTrunfo</h1>
+          <p class="text-xs text-slate-500 font-medium">A Jornada dos Gigantes • 48 Espécies</p>
+        </div>
+      </div>
+
+      <!-- Controles de Acessibilidade e Som no Topo -->
+      <div class="flex items-center gap-2">
+        <button id="tts-toggle-btn" title="Ativar Narração por Voz" aria-label="Narração por Voz" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600 gentle-transition flex items-center gap-1.5 text-xs font-semibold">
+          <svg class="w-5 h-5 text-sage-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+          </svg>
+          <span class="hidden sm:inline" id="tts-label">Voz Ativa</span>
+        </button>
+
+        <button id="sound-btn" title="Som Suave" aria-label="Ligar ou Desligar Som" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600 gentle-transition">
+          <svg id="sound-icon-on" class="w-5 h-5 text-sage-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+          </svg>
+          <svg id="sound-icon-off" class="w-5 h-5 text-slate-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l4-4m0 4l-4-4"/>
+          </svg>
+        </button>
+
+        <button id="config-btn" title="Configurações e Acessibilidade" aria-label="Abrir Configurações" class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600 gentle-transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABAS PRINCIPAIS: MODO JOGO VS MODO EXPLORAR -->
+  <main class="flex-grow max-w-4xl w-full mx-auto p-4 sm:p-6 flex flex-col gap-5">
+    
+    <!-- Seletor de Modo Seguro e Calmo -->
+    <nav class="flex p-1.5 bg-slate-200/80 rounded-2xl max-w-md mx-auto w-full gap-1 border border-slate-300/60" aria-label="Modos do Aplicativo">
+      <button id="tab-play" class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm gentle-transition bg-white text-sage-900 shadow-sm flex items-center justify-center gap-2">
+        <span>🎮 Partida Amigável</span>
+      </button>
+      <button id="tab-explore" class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm gentle-transition text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2">
+        <span>📖 Enciclopédia (48)</span>
+      </button>
+    </nav>
+
+    <!-- ============================================== -->
+    <!-- ÁREA 1: MODO PARTIDA AMIGÁVEL (RODADAS FIXAS) -->
+    <!-- ============================================== -->
+    <section id="play-view" class="flex flex-col gap-4">
+      
+      <!-- Painel de Preparação e Rotina (Previsibilidade) -->
+      <div id="game-setup-panel" class="bg-white rounded-3xl p-6 border border-sage-200 text-center shadow-xs flex flex-col items-center max-w-xl mx-auto w-full">
+        <div class="w-16 h-16 rounded-full bg-sage-100 flex items-center justify-center mb-4 text-3xl">🦕</div>
+        <h2 class="text-xl font-bold text-sage-900 mb-2">Preparar Partida Tranquila</h2>
+        <p class="text-sm text-slate-600 mb-6 max-w-md">
+          Escolha quantas rodadas jogaremos. O baralho agora conta com <strong>48 espécies pré-históricas reais</strong> com nomes populares e científicos!
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full justify-center mb-6">
+          <button onclick="startGame(5)" class="py-3.5 px-4 rounded-2xl border-2 border-sage-300 bg-sage-50 hover:bg-sage-100 font-bold text-sage-800 gentle-transition flex flex-col items-center text-center">
+            <span class="text-base font-extrabold">Curta</span>
+            <span class="text-xs text-slate-500 font-normal">5 rodadas (~3 min)</span>
+          </button>
+          <button onclick="startGame(10)" class="py-3.5 px-4 rounded-2xl border-2 border-sage-500 bg-sage-500 text-white hover:bg-sage-700 font-bold gentle-transition flex flex-col items-center text-center shadow-sm">
+            <span class="text-base font-extrabold">Média</span>
+            <span class="text-xs text-sage-100 font-normal">10 rodadas (~6 min)</span>
+          </button>
+          <button onclick="startGame(15)" class="py-3.5 px-4 rounded-2xl border-2 border-sage-300 bg-sage-50 hover:bg-sage-100 font-bold text-sage-800 gentle-transition flex flex-col items-center text-center">
+            <span class="text-base font-extrabold">Completa</span>
+            <span class="text-xs text-slate-500 font-normal">15 rodadas (~9 min)</span>
+          </button>
+        </div>
+
+        <div class="bg-pastelSand rounded-2xl p-4 text-left w-full border border-amber-200/60 text-xs text-amber-900 flex items-start gap-3">
+          <span class="text-xl">💡</span>
+          <div>
+            <strong>Dica de Aprendizado:</strong> Observe a reconstituição paleoartística, leia o nome popular e o nome científico em itálico com o significado das raízes gregas/latinas!
+          </div>
+        </div>
+      </div>
+
+      <!-- Arena de Batalha Gentil (Exibida durante o jogo) -->
+      <div id="game-arena-panel" class="hidden flex flex-col gap-4">
+        
+        <!-- Indicador de Antecipação e Progresso de Rotina -->
+        <div class="bg-white rounded-2xl p-4 border border-sage-200 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+          <div class="flex items-center gap-3 w-full sm:w-auto">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Rodada:</span>
+            <div class="flex items-center gap-1.5 flex-wrap" id="round-indicator-pills">
+              <!-- Pílulas preenchidas dinamicamente -->
+            </div>
+            <span id="round-text" class="text-sm font-bold text-sage-900 ml-1">1 de 5</span>
+          </div>
+
+          <div class="flex items-center gap-4 text-xs font-medium text-slate-600 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+            <span>Suas vitórias: <strong id="score-player" class="text-sage-700 font-bold text-sm">0</strong></span>
+            <span class="text-slate-300">|</span>
+            <span>Robô Amigo: <strong id="score-cpu" class="text-slate-600 font-bold text-sm">0</strong></span>
+          </div>
+        </div>
+
+        <!-- Área Central de Cartas (Jogador vs Oponente Amigo) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+          
+          <!-- CARTA DO JOGADOR -->
+          <div class="flex flex-col items-center">
+            <div class="w-full flex items-center justify-between mb-1 px-1">
+              <span class="text-xs font-bold text-sage-800 tracking-wide uppercase flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-sage-500 inline-block"></span> Sua Carta
+              </span>
+              <button id="player-speak-btn" onclick="speakCurrentCard('player')" title="Ouvir curiosidade" class="text-xs text-sage-700 hover:text-sage-900 flex items-center gap-1 bg-sage-100 hover:bg-sage-200 px-2 py-0.5 rounded-lg gentle-transition font-medium">
+                🔊 Ler dados
+              </button>
+            </div>
+            <div id="player-card-container" class="w-full">
+              <!-- Renderizado via JS -->
+            </div>
+          </div>
+
+          <!-- CARTA DO OPONENTE (Robô Amigo) -->
+          <div class="flex flex-col items-center">
+            <div class="w-full flex items-center justify-between mb-1 px-1">
+              <span class="text-xs font-bold text-slate-600 tracking-wide uppercase flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-400 inline-block"></span> Carta do Robô Amigo
+              </span>
+              <span id="cpu-status-tag" class="text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-lg">Aguardando seu lance</span>
+            </div>
+            <div id="cpu-card-container" class="w-full">
+              <!-- Renderizado via JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Mensagem de Feedback Calmante & Próximo Passo -->
+        <div id="round-feedback-box" class="hidden bg-white border border-sage-300 p-4 rounded-2xl shadow-sm text-center flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex items-center gap-3 text-left">
+            <div id="feedback-icon" class="text-3xl shrink-0">🌿</div>
+            <div>
+              <p id="feedback-title" class="font-bold text-base text-slate-800 leading-tight">Você venceu a rodada!</p>
+              <p id="feedback-desc" class="text-xs text-slate-500">Seu dinossauro tem maior atributo que o do oponente.</p>
+            </div>
+          </div>
+          <button id="next-round-btn" onclick="nextRound()" class="w-full sm:w-auto px-6 py-2.5 bg-sage-700 hover:bg-sage-900 text-white rounded-xl font-bold text-sm gentle-transition shadow-sm flex items-center justify-center gap-2">
+            <span>Avançar para a próxima</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Tela Conclusiva Tranquila (Fim de Partida) -->
+      <div id="game-end-panel" class="hidden bg-white rounded-3xl p-6 sm:p-8 border border-sage-200 text-center shadow-xs flex flex-col items-center max-w-lg mx-auto w-full">
+        <div id="end-emoji" class="w-20 h-20 rounded-full bg-sage-100 flex items-center justify-center text-4xl mb-3">🌟</div>
+        <h2 id="end-title" class="text-2xl font-bold text-sage-900 mb-2">Excelente Exploração!</h2>
+        <p id="end-description" class="text-sm text-slate-600 mb-6">Você completou todas as rodadas previstas com muita dedicação e conhecimento paleontológico.</p>
+        
+        <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-6 flex justify-around">
+          <div>
+            <span class="block text-xs text-slate-500 uppercase font-semibold">Suas Rodadas</span>
+            <span id="final-player-score" class="text-2xl font-extrabold text-sage-700">0</span>
+          </div>
+          <div class="w-px bg-slate-200"></div>
+          <div>
+            <span class="block text-xs text-slate-500 uppercase font-semibold">Robô Amigo</span>
+            <span id="final-cpu-score" class="text-2xl font-extrabold text-slate-600">0</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 w-full">
+          <button onclick="resetToSetup()" class="flex-1 py-3 px-5 rounded-2xl border border-slate-300 font-bold text-slate-700 hover:bg-slate-100 gentle-transition text-sm">
+            Voltar ao Início
+          </button>
+          <button onclick="startGame(lastRoundsCount)" class="flex-1 py-3 px-5 rounded-2xl bg-sage-700 hover:bg-sage-900 font-bold text-white gentle-transition text-sm shadow-sm">
+            Jogar Mais Uma Vez
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================== -->
+    <!-- ÁREA 2: MODO EXPLORAR (ENCICLOPÉDIA DOS 48 GIGANTES) -->
+    <!-- ============================================== -->
+    <section id="explore-view" class="hidden flex flex-col gap-4">
+      
+      <!-- Barra de Filtros e Busca por Família -->
+      <div class="bg-white rounded-2xl p-4 border border-sage-200 shadow-xs flex flex-col gap-3">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-base font-bold text-sage-900">Enciclopédia Paleontológica (48 Espécies)</h2>
+            <p class="text-xs text-slate-500">Folheie sem limites de tempo. Descubra os nomes científicos e reconstituições realistas.</p>
+          </div>
+          
+          <!-- Campo de Busca em Tempo Real -->
+          <div class="relative w-full md:w-72">
+            <input type="text" id="species-search" oninput="handleSearch(this.value)" placeholder="Buscar por popular ou científico..." class="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-sage-500 gentle-transition">
+            <span class="absolute left-3 top-2.5 text-xs text-slate-400">🔍</span>
+          </div>
+        </div>
+        
+        <!-- Filtros em botões de pílula suave (12 grupos) -->
+        <div class="flex flex-wrap gap-1.5 w-full pt-1" id="group-filter-buttons">
+          <button onclick="filterGroup('ALL')" class="filter-pill active px-3 py-1.5 text-xs font-bold rounded-xl border border-sage-500 bg-sage-500 text-white gentle-transition">
+            Todos (48)
+          </button>
+          <button onclick="filterGroup('1')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            1: Grandes Terópodes
+          </button>
+          <button onclick="filterGroup('2')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            2: Saurópodes Gigantes
+          </button>
+          <button onclick="filterGroup('3')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            3: Ceratopsídeos
+          </button>
+          <button onclick="filterGroup('4')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            4: Armados & Blindados
+          </button>
+          <button onclick="filterGroup('5')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            5: Ornitópodes
+          </button>
+          <button onclick="filterGroup('6')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            6: Pterossauros
+          </button>
+          <button onclick="filterGroup('7')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            7: Répteis Marinhos
+          </button>
+          <button onclick="filterGroup('8')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            8: Dromeossauros
+          </button>
+          <button onclick="filterGroup('9')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            9: Formas Exóticas
+          </button>
+          <button onclick="filterGroup('10')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            10: Pré-Dinossauros & Ancestrais
+          </button>
+          <button onclick="filterGroup('11')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            11: Gigantes Brasileiros 🇧🇷
+          </button>
+          <button onclick="filterGroup('12')" class="filter-pill px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 gentle-transition">
+            12: Megafauna Cenozoica
+          </button>
+        </div>
+      </div>
+
+      <!-- Grid com todas as cartas exploráveis -->
+      <div id="explore-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Renderizado dinamicamente -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE CONFIGURAÇÕES E ACESSIBILIDADE SENSORIAL -->
+  <div id="config-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 border border-sage-200 shadow-xl flex flex-col gap-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-lg text-sage-900 flex items-center gap-2">
+          <span>⚙️</span> Configurações de Acessibilidade
+        </h3>
+        <button onclick="closeConfigModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 font-bold gentle-transition" aria-label="Fechar">
+          ✕
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-4 text-sm">
+        
+        <!-- Nível de Complexidade de Atributos -->
+        <div class="flex flex-col gap-1.5">
+          <label class="font-semibold text-slate-700">Complexidade dos Atributos:</label>
+          <p class="text-xs text-slate-500">Ideal para crianças no início do processo de alfabetização numérica.</p>
+          <div class="grid grid-cols-2 gap-2 mt-1">
+            <button id="mode-simple-btn" onclick="setComplexity('simple')" class="p-3 rounded-xl border-2 border-sage-500 bg-sage-50 text-sage-900 font-bold text-xs gentle-transition text-left">
+              🌱 Iniciante
+              <span class="block text-[11px] font-normal text-slate-500 mt-0.5">3 Atributos Principais</span>
+            </button>
+            <button id="mode-full-btn" onclick="setComplexity('full')" class="p-3 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-xs gentle-transition text-left">
+              🦕 Completo
+              <span class="block text-[11px] font-normal text-slate-500 mt-0.5">Todos os 5 Atributos</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tamanho da Fonte -->
+        <div class="flex flex-col gap-1.5">
+          <label class="font-semibold text-slate-700">Tamanho dos Textos:</label>
+          <div class="flex gap-2">
+            <button onclick="setTextScale('normal')" id="font-normal-btn" class="flex-1 py-2 rounded-xl border-2 border-sage-500 bg-sage-50 text-sage-800 font-bold text-xs">Padrão</button>
+            <button onclick="setTextScale('large')" id="font-large-btn" class="flex-1 py-2 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-xs">Grande (+25%)</button>
+          </div>
+        </div>
+
+        <!-- Velocidade da Fala Sintetizada -->
+        <div class="flex flex-col gap-1.5">
+          <label class="font-semibold text-slate-700">Velocidade da Narração por Voz:</label>
+          <input type="range" id="tts-rate-slider" min="0.7" max="1.1" step="0.1" value="0.9" class="w-full accent-sage-700 cursor-pointer">
+          <div class="flex justify-between text-[11px] text-slate-400">
+            <span>Calma e pausada</span>
+            <span>Normal</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-2">
+        <button onclick="closeConfigModal()" class="w-full py-3 bg-sage-700 hover:bg-sage-900 text-white rounded-xl font-bold text-sm gentle-transition shadow-sm">
+          Salvar e Continuar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE VISUALIZAÇÃO AMPLIADA DA ESPÉCIE (GATILHO MNEMÔNICO) -->
+  <div id="image-zoom-modal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" onclick="closeImageZoom()">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 border border-sage-300 shadow-2xl flex flex-col gap-4" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+        <div>
+          <h3 id="zoom-title" class="text-lg font-black text-slate-900"></h3>
+          <p id="zoom-scientific" class="text-xs italic text-sage-700 font-semibold"></p>
+        </div>
+        <button onclick="closeImageZoom()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 font-bold gentle-transition" aria-label="Fechar ampliação">
+          ✕
+        </button>
+      </div>
+
+      <div id="zoom-art-container" class="w-full h-64 sm:h-72 rounded-2xl bg-gradient-to-b from-slate-50 to-sage-50 border border-slate-200 flex items-center justify-center p-2 overflow-hidden relative">
+        <!-- Paleoarte ou Foto da Internet Renderizada Grande -->
+      </div>
+
+      <div class="bg-sage-50 rounded-2xl p-3 border border-sage-200 text-xs text-slate-700">
+        <p class="font-bold text-sage-900 mb-1" id="zoom-feature-title">🎯 Detalhe Anatômico de Memória:</p>
+        <p id="zoom-feature-desc" class="leading-relaxed text-slate-600"></p>
+        <p id="zoom-source-desc" class="text-[10px] text-slate-400 mt-1 italic"></p>
+      </div>
+
+      <button onclick="closeImageZoom()" class="w-full py-2.5 bg-sage-700 hover:bg-sage-800 text-white rounded-xl font-bold text-xs gentle-transition">
+        Continuar Explorando
+      </button>
+    </div>
+  </div>
+
+  <!-- RODAPÉ FIXO E MINIMALISTA -->
+  <footer class="bg-white border-t border-sage-100 py-3 px-4 text-center text-xs text-slate-500">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1">
+      <p>🦕 <strong>PaleoTrunfo</strong> — 48 Espécies Pré-Históricas com Nomes Científicos e Reconstituições Realistas.</p>
+      <p class="text-slate-400">Sem anúncios • Sem limites de tempo • Respeito sensorial</p>
+    </div>
+  </footer>
+
+  <!-- ============================================== -->
+  <!-- JAVASCRIPT: REPOSITÓRIO EXPANDIDO DE 48 CARTAS -->
+  <!-- ============================================== -->
+  <script>
+    /* --- RENDERIZADOR DE IMAGEM HÍBRIDA (INTERNET + FALLBACK VETORIAL REALISTA) --- */
+    function getSpeciesVisualHtml(dino, isZoom = false) {
+      const hClass = isZoom ? "h-full w-full max-h-64 object-contain" : "h-36 sm:h-44 w-full object-contain";
+      const fallbackSvg = getPaleoArtSvg(dino, isZoom);
+      
+      if (dino.imageUrl) {
+        return `
+          <div class="w-full h-full relative flex items-center justify-center p-1">
+            <img 
+              src="${dino.imageUrl}" 
+              alt="${dino.name} - ${dino.scientificName}" 
+              class="${hClass} card-real-img"
+              loading="lazy"
+              crossorigin="anonymous"
+              onerror="this.onerror=null; this.style.display='none'; document.getElementById('fallback-${dino.id}-${isZoom ? 'z' : 'c'}').style.display='block';"
+            />
+            <div id="fallback-${dino.id}-${isZoom ? 'z' : 'c'}" style="display:none;" class="w-full h-full">
+              ${fallbackSvg}
+            </div>
+          </div>
+        `;
+      }
+      return fallbackSvg;
+    }
+
+    /* --- GERADOR DE PALEOARTE VETORIAL REALISTA E AUTOCONTIDA (FALLBACK ROBUSTO) --- */
+    function getPaleoArtSvg(dino, isZoom = false) {
+      const viewBox = "0 0 320 200";
+      const w = isZoom ? "w-full h-full" : "w-full h-36 sm:h-44";
+      
+      return `
+        <svg class="${w}" viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="skyGrad-${dino.id}" cx="50%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="${dino.palette.bg}"/>
+            </radialGradient>
+            <linearGradient id="bodyGrad-${dino.id}" x1="0%" y1="0%" x2="100%" y2="80%">
+              <stop offset="0%" stop-color="${dino.palette.primary}"/>
+              <stop offset="60%" stop-color="${dino.palette.secondary}"/>
+              <stop offset="100%" stop-color="${dino.palette.belly}"/>
+            </linearGradient>
+            <linearGradient id="accentGrad-${dino.id}" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="${dino.palette.accent}"/>
+              <stop offset="100%" stop-color="${dino.palette.secondary}"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Cenário Biogeológico Sutil (Terreno + Linha de Horizonte) -->
+          <rect width="320" height="200" rx="14" fill="url(#skyGrad-${dino.id})"/>
+          <ellipse cx="160" cy="180" rx="130" ry="16" fill="rgba(0,0,0,0.06)"/>
+          <path d="M 20 185 Q 160 178 300 185" stroke="rgba(100,120,105,0.2)" stroke-width="2" fill="none"/>
+
+          <!-- Renderização da Anatomia Específica da Espécie -->
+          ${dino.customArtSvg}
+        </svg>
+      `;
+    }
+
+    /* --- BARALHO COMPLETO DE 48 ESPÉCIES PRÉ-HISTÓRICAS COM IMAGENS REAIS DA WEB --- */
+    const DINOSAUR_DECK = [
+      // GRUPO 1: Grandes Terópodes Carnívoros
+      {
+        id: "1A",
+        name: "Tiranossauro Rex",
+        scientificName: "Tyrannosaurus rex",
+        nameMeaning: "Rei dos lagartos tiranos",
+        group: "1",
+        groupName: "Grandes Terópodes",
+        colorClass: "bg-rose-50 border-rose-200 text-rose-950",
+        badgeBg: "bg-rose-100 text-rose-800",
+        superTrunfo: true,
+        height: 4.0, length: 12.3, weight: 8400, speed: 27, period: 66,
+        keyFeature: "Crânio massivo de 1,5m reforçado com dentes serrilhados do tamanho de bananas, projetados para estilhaçar ossos.",
+        curiosity: "Possuía uma das mordidas mais esmagadoras de todos os animais terrestres da história!",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus%20TD.png",
+        imageSource: "Reconstrução paleoartística anatômica em estúdio (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#fce7f3", primary: "#831843", secondary: "#9d174d", belly: "#be185d", accent: "#fb7185" },
+        customArtSvg: `
+          <path d="M 50 145 Q 85 130 130 120" stroke="#831843" stroke-width="14" stroke-linecap="round" fill="none"/>
+          <path d="M 125 120 L 115 150 L 105 180 L 95 180" stroke="#701a35" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <ellipse cx="160" cy="115" rx="42" ry="26" fill="url(#bodyGrad-1A)" transform="rotate(-6 160 115)"/>
+          <path d="M 155 115 L 150 152 L 140 182 L 130 182" stroke="#831843" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 190 108 Q 215 95 235 85" stroke="#9d174d" stroke-width="20" stroke-linecap="round" fill="none"/>
+          <path d="M 220 70 L 275 80 L 270 100 L 225 102 Z" fill="#831843"/>
+          <path d="M 230 102 L 268 100 L 265 112 L 230 110 Z" fill="#701a35"/>
+          <path d="M 238 100 L 242 104 L 246 100 L 250 104 L 254 100 L 258 104" stroke="#ffffff" stroke-width="2" fill="none"/>
+          <circle cx="240" cy="79" r="3" fill="#facc15"/>
+          <circle cx="240" cy="79" r="1.2" fill="#000000"/>
+          <path d="M 235 75 Q 242 74 246 76" stroke="#fb7185" stroke-width="3" fill="none"/>
+          <path d="M 192 120 L 202 130 L 208 127" stroke="#831843" stroke-width="4" stroke-linecap="round" fill="none"/>
+        `
+      },
+      {
+        id: "1B",
+        name: "Espinossauro",
+        scientificName: "Spinosaurus aegyptiacus",
+        nameMeaning: "Lagarto espinho do Egito",
+        group: "1",
+        groupName: "Grandes Terópodes",
+        colorClass: "bg-rose-50 border-rose-200 text-rose-950",
+        badgeBg: "bg-rose-100 text-rose-800",
+        superTrunfo: false,
+        height: 5.4, length: 15.0, weight: 7500, speed: 20, period: 95,
+        keyFeature: "Enorme vela dorsal de quase 2m suportada por espinhas neurais e cauda ondulante adaptada à natação.",
+        curiosity: "Tinha cauda em formato de remo e uma enorme vela dorsal, excelente nadador em rios cretáceos.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Spinosaurus%20TD.png",
+        imageSource: "Reconstrução paleoartística semi-aquática isolada (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#ffe4e6", primary: "#9f1239", secondary: "#be123c", belly: "#e11d48", accent: "#f43f5e" },
+        customArtSvg: `
+          <path d="M 110 115 Q 155 35 210 105 Z" fill="url(#accentGrad-1B)" stroke="#881337" stroke-width="2"/>
+          <path d="M 125 110 Q 155 50 155 110 M 140 105 Q 165 45 175 105 M 170 100 Q 185 48 195 105" stroke="#ffe4e6" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <path d="M 40 135 Q 75 130 115 125 L 115 138 Q 75 148 40 135 Z" fill="#9f1239"/>
+          <ellipse cx="160" cy="125" rx="46" ry="20" fill="url(#bodyGrad-1B)"/>
+          <path d="M 130 130 L 125 160 L 115 180" stroke="#881337" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M 165 130 L 160 162 L 150 182" stroke="#9f1239" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 200 115 Q 225 105 275 102 L 273 114 Q 225 118 200 125 Z" fill="#9f1239"/>
+          <circle cx="240" cy="103" r="2.5" fill="#facc15"/>
+          <path d="M 185 130 L 195 155 L 205 160" stroke="#be123c" stroke-width="5" stroke-linecap="round" fill="none"/>
+        `
+      },
+      {
+        id: "1C",
+        name: "Giganotossauro",
+        scientificName: "Giganotosaurus carolinii",
+        nameMeaning: "Lagarto gigante do sul",
+        group: "1",
+        groupName: "Grandes Terópodes",
+        colorClass: "bg-rose-50 border-rose-200 text-rose-950",
+        badgeBg: "bg-rose-100 text-rose-800",
+        superTrunfo: false,
+        height: 4.2, length: 13.0, weight: 8200, speed: 32, period: 97,
+        keyFeature: "Crânio de perfil baixo com dentes afiados como lâminas de serra, ideais para cortar nacos de carne de titanossauros.",
+        curiosity: "Habitou a América do Sul e caçava até gigantescos saurópodes em bandos coordenados.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Giganotosaurus%20carolinii%20restoration.png",
+        imageSource: "Modelo anatômico isolado de Giganotosaurus (Wikimedia Commons)",
+        palette: { bg: "#fdf2f8", primary: "#701a75", secondary: "#86198f", belly: "#a21caf", accent: "#d946ef" },
+        customArtSvg: `
+          <path d="M 45 140 Q 85 125 125 120" stroke="#701a75" stroke-width="13" stroke-linecap="round" fill="none"/>
+          <ellipse cx="160" cy="116" rx="44" ry="24" fill="url(#bodyGrad-1C)" transform="rotate(-4 160 116)"/>
+          <path d="M 125 120 L 120 155 L 110 182" stroke="#581c87" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 160 120 L 155 156 L 145 182" stroke="#701a75" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 195 110 L 270 95 L 265 118 L 200 120 Z" fill="#86198f"/>
+          <circle cx="238" cy="98" r="3" fill="#facc15"/>
+          <path d="M 188 122 L 200 135" stroke="#701a75" stroke-width="5" stroke-linecap="round" fill="none"/>
+        `
+      },
+      {
+        id: "1D",
+        name: "Alossauro",
+        scientificName: "Allosaurus fragilis",
+        nameMeaning: "Lagarto diferente e frágil",
+        group: "1",
+        groupName: "Grandes Terópodes",
+        colorClass: "bg-rose-50 border-rose-200 text-rose-950",
+        badgeBg: "bg-rose-100 text-rose-800",
+        superTrunfo: false,
+        height: 3.5, length: 9.7, weight: 2300, speed: 34, period: 150,
+        keyFeature: "Par de cristas lacrimais cor-de-fogo logo acima dos olhos e braços ágeis com três garras afiadas.",
+        curiosity: "Predador supremo do período Jurássico, possuía cristas ósseas decorativas acima dos olhos.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Allosaurus%20TD.png",
+        imageSource: "Reconstrução paleoartística isolada em fundo branco (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#fff1f2", primary: "#991b1b", secondary: "#b91c1c", belly: "#dc2626", accent: "#f87171" },
+        customArtSvg: `
+          <path d="M 40 148 Q 80 132 125 124" stroke="#991b1b" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <ellipse cx="160" cy="118" rx="40" ry="22" fill="url(#bodyGrad-1D)"/>
+          <path d="M 125 124 L 118 155 L 108 180" stroke="#7f1d1d" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M 158 122 L 152 155 L 140 180" stroke="#991b1b" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 195 108 L 260 92 L 255 112 L 200 118 Z" fill="#b91c1c"/>
+          <polygon points="232,88 238,82 242,91" fill="#f87171"/>
+          <circle cx="236" cy="95" r="2.5" fill="#fef08a"/>
+          <path d="M 190 122 L 205 138 L 212 135" stroke="#991b1b" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        `
+      },
+
+      // GRUPO 2: Saurópodes Gigantes
+      {
+        id: "2A",
+        name: "Braquiossauro",
+        scientificName: "Brachiosaurus altithorax",
+        nameMeaning: "Lagarto com braços e tórax alto",
+        group: "2",
+        groupName: "Saurópodes Gigantes",
+        colorClass: "bg-emerald-50 border-emerald-200 text-emerald-950",
+        badgeBg: "bg-emerald-100 text-emerald-800",
+        superTrunfo: false,
+        height: 12.5, length: 22.0, weight: 42000, speed: 12, period: 152,
+        keyFeature: "Postura ereta quase vertical estilo girafa, com patas dianteiras mais altas que as traseiras.",
+        curiosity: "Suas patas dianteiras eram maiores que as traseiras, permitindo alcançar as copas das árvores.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Brachiosaurus%20altithorax%20restoration.png",
+        imageSource: "Reconstrução anatômica isolada de Brachiosaurus (Wikimedia Commons)",
+        palette: { bg: "#ecfdf5", primary: "#065f46", secondary: "#047857", belly: "#059669", accent: "#34d399" },
+        customArtSvg: `
+          <path d="M 40 160 Q 75 150 110 145" stroke="#065f46" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <ellipse cx="140" cy="138" rx="42" ry="30" fill="url(#bodyGrad-2A)" transform="rotate(-18 140 138)"/>
+          <path d="M 105 145 L 100 182" stroke="#064e3b" stroke-width="13" stroke-linecap="round" fill="none"/>
+          <path d="M 155 130 L 155 182" stroke="#047857" stroke-width="15" stroke-linecap="round" fill="none"/>
+          <path d="M 165 125 Q 195 65 205 35" stroke="#047857" stroke-width="18" stroke-linecap="round" fill="none"/>
+          <ellipse cx="210" cy="30" rx="14" ry="9" fill="#065f46" transform="rotate(-20 210 30)"/>
+          <circle cx="212" cy="28" r="2" fill="#facc15"/>
+        `
+      },
+      {
+        id: "2B",
+        name: "Argentinossauro",
+        scientificName: "Argentinosaurus huinculensis",
+        nameMeaning: "Lagarto da Argentina",
+        group: "2",
+        groupName: "Saurópodes Gigantes",
+        colorClass: "bg-emerald-50 border-emerald-200 text-emerald-950",
+        badgeBg: "bg-emerald-100 text-emerald-800",
+        superTrunfo: false,
+        height: 16.0, length: 36.0, weight: 78000, speed: 8, period: 94,
+        keyFeature: "Tronco em formato de barril maciço e pernas colunares como pilares de sustentação de pontes.",
+        curiosity: "Um dos maiores vertebrados terrestres conhecidos pela ciência, suas vértebras mediam mais de 1,5 metro!",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Argentinosaurus%20huinculensis%20restoration.png",
+        imageSource: "Reconstrução paleobiológica em fundo neutro (Wikimedia Commons)",
+        palette: { bg: "#f0fdf4", primary: "#14532d", secondary: "#166534", belly: "#15803d", accent: "#4ade80" },
+        customArtSvg: `
+          <path d="M 30 155 Q 70 145 110 138" stroke="#14532d" stroke-width="16" stroke-linecap="round" fill="none"/>
+          <ellipse cx="150" cy="130" rx="55" ry="36" fill="url(#bodyGrad-2B)"/>
+          <path d="M 115 140 L 110 182" stroke="#14532d" stroke-width="18" stroke-linecap="round" fill="none"/>
+          <path d="M 180 135 L 180 182" stroke="#166534" stroke-width="18" stroke-linecap="round" fill="none"/>
+          <path d="M 195 120 Q 240 90 280 65" stroke="#166534" stroke-width="20" stroke-linecap="round" fill="none"/>
+          <ellipse cx="285" cy="62" rx="13" ry="8" fill="#14532d"/>
+          <circle cx="288" cy="60" r="1.8" fill="#facc15"/>
+        `
+      },
+      {
+        id: "2C",
+        name: "Diplodoco",
+        scientificName: "Diplodocus carnegii",
+        nameMeaning: "Dupla barra (ossos da cauda)",
+        group: "2",
+        groupName: "Saurópodes Gigantes",
+        colorClass: "bg-emerald-50 border-emerald-200 text-emerald-950",
+        badgeBg: "bg-emerald-100 text-emerald-800",
+        superTrunfo: false,
+        height: 5.0, length: 27.0, weight: 15000, speed: 15, period: 154,
+        keyFeature: "Cauda hiperalongada afinando em chicote e dentes frontais em forma de lápis para ceifar folhas.",
+        curiosity: "Sua cauda em forma de chicote quebrava a barreira do som ao ser agitada como defesa.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Diplodocus%20TD.png",
+        imageSource: "Modelo anatômico isolado em fundo limpo (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#f0fdf4", primary: "#164e63", secondary: "#0e7490", belly: "#0891b2", accent: "#22d3ee" },
+        customArtSvg: `
+          <path d="M 20 148 Q 50 140 110 135" stroke="#164e63" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <ellipse cx="150" cy="130" rx="42" ry="24" fill="url(#bodyGrad-2C)"/>
+          <path d="M 125 135 L 120 180" stroke="#155e75" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 170 132 L 170 180" stroke="#0e7490" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 185 125 Q 240 120 285 105" stroke="#0e7490" stroke-width="14" stroke-linecap="round" fill="none"/>
+          <ellipse cx="290" cy="102" rx="11" ry="6" fill="#164e63"/>
+        `
+      },
+      {
+        id: "2D",
+        name: "Apatossauro",
+        scientificName: "Apatosaurus ajax",
+        nameMeaning: "Lagarto enganoso",
+        group: "2",
+        groupName: "Saurópodes Gigantes",
+        colorClass: "bg-emerald-50 border-emerald-200 text-emerald-950",
+        badgeBg: "bg-emerald-100 text-emerald-800",
+        superTrunfo: false,
+        height: 5.5, length: 23.0, weight: 24000, speed: 14, period: 151,
+        keyFeature: "Pescoço extraordinariamente largo e robusto, ancorado por costelas cervicais espessas.",
+        curiosity: "Famoso na história popular pelo sinônimo Brontossauro, tinha ossos cervicais muito robustos.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Apatosaurus%20louisae%20by%20durbed.jpg",
+        imageSource: "Reconstrução paleoartística anatômica em estúdio (Wikimedia Commons / Durbed)",
+        palette: { bg: "#ecfdf5", primary: "#134e4a", secondary: "#0f766e", belly: "#14b8a6", accent: "#5eead4" },
+        customArtSvg: `
+          <path d="M 30 152 Q 70 142 110 138" stroke="#134e4a" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <ellipse cx="150" cy="132" rx="46" ry="28" fill="url(#bodyGrad-2D)"/>
+          <path d="M 120 140 L 115 180" stroke="#115e59" stroke-width="15" stroke-linecap="round" fill="none"/>
+          <path d="M 175 135 L 175 180" stroke="#0f766e" stroke-width="15" stroke-linecap="round" fill="none"/>
+          <path d="M 190 125 Q 235 105 270 90" stroke="#0f766e" stroke-width="18" stroke-linecap="round" fill="none"/>
+          <ellipse cx="275" cy="88" rx="12" ry="7" fill="#134e4a"/>
+        `
+      },
+
+      // GRUPO 3: Ceratopsídeos
+      {
+        id: "3A",
+        name: "Triceratops",
+        scientificName: "Triceratops horridus",
+        nameMeaning: "Rosto com três chifres espantoso",
+        group: "3",
+        groupName: "Ceratopsídeos",
+        colorClass: "bg-amber-50 border-amber-200 text-amber-950",
+        badgeBg: "bg-amber-100 text-amber-800",
+        superTrunfo: false,
+        height: 3.0, length: 9.0, weight: 9500, speed: 25, period: 68,
+        keyFeature: "Escudo parietal sólido e dois grandes chifres sobreoculares de até 1 metro apontando para a frente.",
+        curiosity: "Seu golaço ósseo maciço protegia seu pescoço em embates contra o T-Rex.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Triceratops%20TD.png",
+        imageSource: "Reconstrução 3D de estúdio com fundo transparente/branco (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#fffbeb", primary: "#78350f", secondary: "#92400e", belly: "#b45309", accent: "#f59e0b" },
+        customArtSvg: `
+          <path d="M 50 145 Q 85 135 120 130" stroke="#78350f" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <ellipse cx="145" cy="130" rx="44" ry="28" fill="url(#bodyGrad-3A)"/>
+          <path d="M 115 135 L 110 180" stroke="#78350f" stroke-width="13" stroke-linecap="round" fill="none"/>
+          <path d="M 165 135 L 165 180" stroke="#92400e" stroke-width="13" stroke-linecap="round" fill="none"/>
+          <path d="M 185 85 Q 215 70 215 125 Z" fill="url(#accentGrad-3A)" stroke="#78350f" stroke-width="3"/>
+          <ellipse cx="200" cy="98" rx="5" ry="8" fill="#fde68a" opacity="0.6"/>
+          <path d="M 195 110 L 255 125 L 245 145 L 200 135 Z" fill="#92400e"/>
+          <path d="M 255 125 L 265 135 L 250 142 Z" fill="#451a03"/>
+          <path d="M 215 105 L 258 75" stroke="#fef3c7" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M 220 110 L 265 82" stroke="#fde68a" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M 252 125 L 262 112" stroke="#fef3c7" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="218" cy="115" r="3" fill="#000000"/>
+        `
+      },
+      {
+        id: "3B",
+        name: "Estiracossauro",
+        scientificName: "Styracosaurus albertensis",
+        nameMeaning: "Lagarto pontiagudo de Alberta",
+        group: "3",
+        groupName: "Ceratopsídeos",
+        colorClass: "bg-amber-50 border-amber-200 text-amber-950",
+        badgeBg: "bg-amber-100 text-amber-800",
+        superTrunfo: false,
+        height: 2.2, length: 5.5, weight: 3000, speed: 28, period: 75,
+        keyFeature: "Coroa de espinhos longos saindo da borda do escudo e chifre nasal retilíneo imponente.",
+        curiosity: "Seu escudo ósseo contava com até seis longos espigões voltados para trás.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Styracosaurus%20BW.jpg",
+        imageSource: "Reconstrução anatômica isolada em fundo neutro (Wikimedia Commons / Nobu Tamura)",
+        palette: { bg: "#fef3c7", primary: "#854d0e", secondary: "#a16207", belly: "#ca8a04", accent: "#eab308" },
+        customArtSvg: `
+          <path d="M 50 145 Q 85 135 120 130" stroke="#854d0e" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <ellipse cx="145" cy="130" rx="42" ry="26" fill="url(#bodyGrad-3B)"/>
+          <path d="M 115 135 L 110 180" stroke="#854d0e" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 165 135 L 165 180" stroke="#a16207" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 185 90 Q 210 80 210 125 Z" fill="#ca8a04"/>
+          <line x1="190" y1="88" x2="175" y2="60" stroke="#fef08a" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="200" y1="82" x2="195" y2="52" stroke="#fef08a" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="210" y1="88" x2="218" y2="58" stroke="#fef08a" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M 195 110 L 250 125 L 240 142 L 200 135 Z" fill="#854d0e"/>
+          <path d="M 240 124 L 248 85" stroke="#fef08a" stroke-width="4.5" stroke-linecap="round"/>
+          <circle cx="215" cy="116" r="2.5" fill="#000000"/>
+        `
+      },
+      {
+        id: "3C",
+        name: "Paquirrinossauro",
+        scientificName: "Pachyrhinosaurus canadensis",
+        nameMeaning: "Lagarto de nariz grosso do Canadá",
+        group: "3",
+        groupName: "Ceratopsídeos",
+        colorClass: "bg-amber-50 border-amber-200 text-amber-950",
+        badgeBg: "bg-amber-100 text-amber-800",
+        superTrunfo: false,
+        height: 2.5, length: 6.0, weight: 3500, speed: 26, period: 70,
+        keyFeature: "Domo nasal ósseo rugoso (boss) achatado, usado em choques de cabeça frontais.",
+        curiosity: "Ao invés de um chifre agudo, portava uma calosidade óssea maciça de impacto no focinho.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Pachyrhinosaurus%20TD.png",
+        imageSource: "Reconstrução paleoartística isolada em fundo transparente (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#fffbeb", primary: "#9a3412", secondary: "#c2410c", belly: "#ea580c", accent: "#fb923c" },
+        customArtSvg: `
+          <ellipse cx="145" cy="130" rx="42" ry="26" fill="url(#bodyGrad-3C)"/>
+          <path d="M 115 135 L 110 180" stroke="#9a3412" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 165 135 L 165 180" stroke="#c2410c" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 185 92 Q 215 80 215 125 Z" fill="#ea580c"/>
+          <path d="M 195 112 L 250 125 L 240 145 Z" fill="#9a3412"/>
+          <ellipse cx="238" cy="116" rx="9" ry="6" fill="#fed7aa" stroke="#7c2d12" stroke-width="1.5"/>
+          <circle cx="212" cy="116" r="2.5" fill="#000000"/>
+        `
+      },
+      {
+        id: "3D",
+        name: "Protoceratops",
+        scientificName: "Protoceratops andrewsi",
+        nameMeaning: "Primeiro rosto com chifres",
+        group: "3",
+        groupName: "Ceratopsídeos",
+        colorClass: "bg-amber-50 border-amber-200 text-amber-950",
+        badgeBg: "bg-amber-100 text-amber-800",
+        superTrunfo: false,
+        height: 0.8, length: 1.8, weight: 190, speed: 30, period: 75,
+        keyFeature: "Porte compacto com bico curvo cortador de plantas duras e escudo sem chifres agressivos.",
+        curiosity: "Tinha porte de ovelha e bico de papagaio. Um fóssil famoso o preservou lutando contra um Velociraptor!",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Protoceratops%20andrewsi%20restoration.png",
+        imageSource: "Reconstrução anatômica isolada de Protoceratops (Wikimedia Commons)",
+        palette: { bg: "#fef3c7", primary: "#b45309", secondary: "#d97706", belly: "#f59e0b", accent: "#fde68a" },
+        customArtSvg: `
+          <ellipse cx="145" cy="135" rx="36" ry="22" fill="url(#bodyGrad-3D)"/>
+          <path d="M 120 140 L 115 180" stroke="#b45309" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M 165 140 L 165 180" stroke="#d97706" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M 175 105 Q 200 95 200 135 Z" fill="#f59e0b"/>
+          <path d="M 188 120 L 235 132 L 228 145 Z" fill="#b45309"/>
+          <path d="M 235 132 L 244 140 L 230 143 Z" fill="#78350f"/>
+          <circle cx="205" cy="122" r="2.5" fill="#000000"/>
+        `
+      },
+
+      // GRUPO 4: Armados & Blindados (Tireóforos)
+      {
+        id: "4A",
+        name: "Anquilossauro",
+        scientificName: "Ankylosaurus magniventris",
+        nameMeaning: "Lagarto fundido de ventre largo",
+        group: "4",
+        groupName: "Armados & Blindados",
+        colorClass: "bg-stone-50 border-stone-200 text-stone-950",
+        badgeBg: "bg-stone-200 text-stone-800",
+        superTrunfo: false,
+        height: 1.7, length: 8.0, weight: 6500, speed: 10, period: 67,
+        keyFeature: "Blindagem de placas ósseas fundidas nas costas e uma maça óssea sólida na ponta da cauda.",
+        curiosity: "Possuía placas dérmicas tão duras que até suas pálpebras tinham ossos protetores.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Ankylosaurus%20TD.png",
+        imageSource: "Reconstrução anatômica 3D isolada com fundo transparente (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#f5f5f4", primary: "#44403c", secondary: "#57534e", belly: "#78716c", accent: "#d6d3d1" },
+        customArtSvg: `
+          <path d="M 45 145 Q 85 142 120 138" stroke="#44403c" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <ellipse cx="40" cy="146" rx="12" ry="8" fill="#292524"/>
+          <ellipse cx="155" cy="135" rx="50" ry="24" fill="url(#bodyGrad-4A)"/>
+          <circle cx="130" cy="125" r="4" fill="#d6d3d1"/>
+          <circle cx="145" cy="122" r="4.5" fill="#d6d3d1"/>
+          <circle cx="162" cy="122" r="4.5" fill="#d6d3d1"/>
+          <circle cx="178" cy="125" r="4" fill="#d6d3d1"/>
+          <path d="M 125 145 L 120 180" stroke="#44403c" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 175 145 L 175 180" stroke="#57534e" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <polygon points="195,128 245,138 235,152 195,145" fill="#44403c"/>
+          <polygon points="202,125 210,118 215,128" fill="#d6d3d1"/>
+        `
+      },
+      {
+        id: "4B",
+        name: "Estegossauro",
+        scientificName: "Stegosaurus stenops",
+        nameMeaning: "Lagarto telhado de face estreita",
+        group: "4",
+        groupName: "Armados & Blindados",
+        colorClass: "bg-stone-50 border-stone-200 text-stone-950",
+        badgeBg: "bg-stone-200 text-stone-800",
+        superTrunfo: false,
+        height: 4.0, length: 9.0, weight: 4800, speed: 15, period: 152,
+        keyFeature: "Fileira dupla de placas pentagonais erguidas nas costas e 4 espigões na cauda (thagomizer).",
+        curiosity: "As placas ósseas nas suas costas ajudavam na termorregulação e sua cauda tinha quatro espigões.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Stegosaurus%20TD.png",
+        imageSource: "Reconstrução anatômica 3D isolada com fundo transparente (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#f5f5f4", primary: "#3f3f46", secondary: "#52525b", belly: "#71717a", accent: "#fb923c" },
+        customArtSvg: `
+          <polygon points="105,120 115,85 125,120" fill="url(#accentGrad-4B)"/>
+          <polygon points="125,115 138,75 150,115" fill="url(#accentGrad-4B)"/>
+          <polygon points="150,115 165,70 180,115" fill="url(#accentGrad-4B)"/>
+          <polygon points="180,118 192,85 205,118" fill="url(#accentGrad-4B)"/>
+          <ellipse cx="150" cy="135" rx="46" ry="26" fill="url(#bodyGrad-4B)"/>
+          <path d="M 45 152 Q 85 145 115 138" stroke="#3f3f46" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <line x1="50" y1="150" x2="35" y2="135" stroke="#f97316" stroke-width="3" stroke-linecap="round"/>
+          <line x1="55" y1="152" x2="45" y2="132" stroke="#f97316" stroke-width="3" stroke-linecap="round"/>
+          <path d="M 120 145 L 115 180" stroke="#3f3f46" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 175 145 L 175 180" stroke="#52525b" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 195 135 L 245 150 L 235 160 L 195 148 Z" fill="#3f3f46"/>
+          <circle cx="230" cy="151" r="2" fill="#facc15"/>
+        `
+      },
+      {
+        id: "4C",
+        name: "Nodossauro",
+        scientificName: "Nodosaurus textilis",
+        nameMeaning: "Lagarto nodoso tecido",
+        group: "4",
+        groupName: "Armados & Blindados",
+        colorClass: "bg-stone-50 border-stone-200 text-stone-950",
+        badgeBg: "bg-stone-200 text-stone-800",
+        superTrunfo: false,
+        height: 1.8, length: 6.0, weight: 2500, speed: 12, period: 110,
+        keyFeature: "Couraça densa contínua com espinhos projetando-se lateralmente nos ombros.",
+        curiosity: "Diferente do Anquilossauro, não tinha maça na cauda, confiando em espinhos laterais e placas densas.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Nodosaurus%20textilis%20restoration.jpg",
+        imageSource: "Reconstrução paleoartística isolada em estúdio (Wikimedia Commons)",
+        palette: { bg: "#f5f5f4", primary: "#292524", secondary: "#44403c", belly: "#78716c", accent: "#a8a29e" },
+        customArtSvg: `
+          <ellipse cx="150" cy="135" rx="46" ry="24" fill="url(#bodyGrad-4C)"/>
+          <path d="M 115 145 L 110 180" stroke="#292524" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 175 145 L 175 180" stroke="#44403c" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 45 148 Q 85 142 115 138" stroke="#292524" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <polygon points="175,130 195,115 185,138" fill="#a8a29e"/>
+          <path d="M 195 132 L 240 142 L 230 152 Z" fill="#292524"/>
+        `
+      },
+      {
+        id: "4D",
+        name: "Kentrossauro",
+        scientificName: "Kentrosaurus aethiopicus",
+        nameMeaning: "Lagarto de pontas da Etiópia",
+        group: "4",
+        groupName: "Armados & Blindados",
+        colorClass: "bg-stone-50 border-stone-200 text-stone-950",
+        badgeBg: "bg-stone-200 text-stone-800",
+        superTrunfo: false,
+        height: 2.0, length: 4.5, weight: 1300, speed: 18, period: 152,
+        keyFeature: "Pequenas placas na frente e espigões agudos duplos cobrindo todo o dorso traseiro e cauda.",
+        curiosity: "Substituía as placas dorsais por longos e afiados espinhos que chegavam aos ombros e quadris.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Kentrosaurus%20aethiopicus%20life%20restoration.png",
+        imageSource: "Reconstrução morfológica fiel isolada (Wikimedia Commons)",
+        palette: { bg: "#fafaf9", primary: "#1c1917", secondary: "#292524", belly: "#57534e", accent: "#fb7185" },
+        customArtSvg: `
+          <polygon points="120,120 128,100 136,120" fill="#a8a29e"/>
+          <line x1="145" y1="120" x2="152" y2="85" stroke="#fb7185" stroke-width="3" stroke-linecap="round"/>
+          <line x1="165" y1="122" x2="175" y2="90" stroke="#fb7185" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="150" cy="135" rx="42" ry="24" fill="url(#bodyGrad-4D)"/>
+          <path d="M 50 150 Q 85 145 115 138" stroke="#1c1917" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <line x1="60" y1="148" x2="48" y2="130" stroke="#fb7185" stroke-width="3" stroke-linecap="round"/>
+          <path d="M 120 145 L 115 180" stroke="#1c1917" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 170 145 L 170 180" stroke="#292524" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 190 135 L 235 145 L 225 155 Z" fill="#1c1917"/>
+        `
+      },
+
+      // GRUPO 5: Ornitópodes e Cristados
+      {
+        id: "5A",
+        name: "Parassaurolofo",
+        scientificName: "Parasaurolophus walkeri",
+        nameMeaning: "Perto do lagarto de crista",
+        group: "5",
+        groupName: "Ornitópodes",
+        colorClass: "bg-sky-50 border-sky-200 text-sky-950",
+        badgeBg: "bg-sky-100 text-sky-800",
+        superTrunfo: false,
+        height: 3.8, length: 10.0, weight: 3600, speed: 35, period: 76,
+        keyFeature: "Crista tubular curvada de até 1,8m conectada às vias aéreas para emitir chamados ressonantes.",
+        curiosity: "Sua crista oca chegava a 1,8 metro de comprimento e produzia notas sonoras graves e vibrantes.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Parasaurolophus%20TD.png",
+        imageSource: "Reconstrução anatômica 3D isolada em fundo transparente (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#f0f9ff", primary: "#0369a1", secondary: "#0284c7", belly: "#38bdf8", accent: "#f97316" },
+        customArtSvg: `
+          <path d="M 40 150 Q 85 135 125 128" stroke="#0369a1" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <ellipse cx="150" cy="125" rx="42" ry="26" fill="url(#bodyGrad-5A)"/>
+          <path d="M 120 135 L 115 180" stroke="#075985" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 165 135 L 165 180" stroke="#0284c7" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 185 120 Q 210 105 235 98" stroke="#0284c7" stroke-width="14" stroke-linecap="round" fill="none"/>
+          <path d="M 230 92 L 270 102 L 265 116 L 230 110 Z" fill="#0369a1"/>
+          <path d="M 235 92 Q 220 50 175 60 Q 185 75 228 95 Z" fill="url(#accentGrad-5A)" stroke="#0c4a6e" stroke-width="1.5"/>
+          <circle cx="242" cy="100" r="2.5" fill="#facc15"/>
+        `
+      },
+      {
+        id: "5B",
+        name: "Iguanodonte",
+        scientificName: "Iguanodon bernissartensis",
+        nameMeaning: "Dente de iguana de Bernissart",
+        group: "5",
+        groupName: "Ornitópodes",
+        colorClass: "bg-sky-50 border-sky-200 text-sky-950",
+        badgeBg: "bg-sky-100 text-sky-800",
+        superTrunfo: false,
+        height: 3.2, length: 10.0, weight: 4200, speed: 30, period: 125,
+        keyFeature: "Polegar cônico agudo transformado em espora defensiva contra grandes predadores.",
+        curiosity: "Um dos primeiros dinossauros descritos pela ciência; seu polegar cônico agudo servia para defesa.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Iguanodon%20bernissartensis%20restoration.jpg",
+        imageSource: "Reconstrução paleoartística isolada em estúdio (Wikimedia Commons)",
+        palette: { bg: "#f0f9ff", primary: "#075985", secondary: "#0369a1", belly: "#0ea5e9", accent: "#bae6fd" },
+        customArtSvg: `
+          <ellipse cx="150" cy="125" rx="42" ry="26" fill="url(#bodyGrad-5B)"/>
+          <path d="M 120 135 L 115 180" stroke="#075985" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 165 135 L 165 180" stroke="#0369a1" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 185 120 L 245 105 L 240 120 Z" fill="#075985"/>
+          <path d="M 188 132 L 205 145" stroke="#0369a1" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <polygon points="205,142 215,145 206,149" fill="#facc15"/>
+        `
+      },
+      {
+        id: "5C",
+        name: "Paquicefalossauro",
+        scientificName: "Pachycephalosaurus wyomingensis",
+        nameMeaning: "Lagarto de cabeça grossa do Wyoming",
+        group: "5",
+        groupName: "Ornitópodes",
+        colorClass: "bg-sky-50 border-sky-200 text-sky-950",
+        badgeBg: "bg-sky-100 text-sky-800",
+        superTrunfo: false,
+        height: 1.8, length: 4.5, weight: 450, speed: 38, period: 68,
+        keyFeature: "Domo ósseo espesso no topo do crânio orlado por pequenos nódulos pontiagudos.",
+        curiosity: "Seu crânio ostentava um domo de osso sólido de até 25 cm para empurrões e disputas territoriais.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Pachycephalosaurus%20TD.png",
+        imageSource: "Reconstrução 3D isolada com fundo transparente (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#f0f9ff", primary: "#0c4a6e", secondary: "#075985", belly: "#0284c7", accent: "#e0f2fe" },
+        customArtSvg: `
+          <ellipse cx="150" cy="125" rx="38" ry="22" fill="url(#bodyGrad-5C)"/>
+          <path d="M 125 130 L 120 180" stroke="#0c4a6e" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 160 130 L 160 180" stroke="#075985" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 185 115 L 230 108 L 225 122 Z" fill="#0c4a6e"/>
+          <ellipse cx="220" cy="98" rx="14" ry="10" fill="#f8fafc" stroke="#0c4a6e" stroke-width="2"/>
+          <circle cx="228" cy="112" r="2.5" fill="#000000"/>
+        `
+      },
+      {
+        id: "5D",
+        name: "Maiassauro",
+        scientificName: "Maiasaura peeblesorum",
+        nameMeaning: "Lagarto boa mãe",
+        group: "5",
+        groupName: "Ornitópodes",
+        colorClass: "bg-sky-50 border-sky-200 text-sky-950",
+        badgeBg: "bg-sky-100 text-sky-800",
+        superTrunfo: false,
+        height: 3.0, length: 9.0, weight: 3000, speed: 32, period: 77,
+        keyFeature: "Focinho em bico plano e pequena crista sólida entre os olhos para reconhecimento de ninhadas.",
+        curiosity: "Forneceu a primeira prova fóssil irrefutável de que dinossauros cuidavam dos ninhos e alimentavam filhotes.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Maiasaura%20peeblesorum%20restoration.png",
+        imageSource: "Reconstrução anatômica isolada em fundo neutro (Wikimedia Commons)",
+        palette: { bg: "#f0f9ff", primary: "#0284c7", secondary: "#38bdf8", belly: "#7dd3fc", accent: "#bae6fd" },
+        customArtSvg: `
+          <ellipse cx="150" cy="125" rx="42" ry="25" fill="url(#bodyGrad-5D)"/>
+          <path d="M 120 135 L 115 180" stroke="#0369a1" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 165 135 L 165 180" stroke="#0284c7" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 185 120 L 255 110 L 245 125 Z" fill="#0284c7"/>
+          <ellipse cx="225" cy="104" rx="4" ry="2" fill="#bae6fd"/>
+        `
+      },
+
+      // GRUPO 6: Pterossauros dos Céus
+      {
+        id: "6A",
+        name: "Quetzalcoatlus",
+        scientificName: "Quetzalcoatlus northropi",
+        nameMeaning: "Serpente emplumada dos astecas",
+        group: "6",
+        groupName: "Pterossauros",
+        colorClass: "bg-purple-50 border-purple-200 text-purple-950",
+        badgeBg: "bg-purple-100 text-purple-800",
+        superTrunfo: false,
+        height: 5.2, length: 11.0, weight: 220, speed: 108, period: 68,
+        keyFeature: "Envergadura alar descomunal de 11 metros e bico pontiagudo do tamanho de um homem adulto.",
+        curiosity: "Maior animal que voou na história da Terra; em terra firme, tinha a altura de uma girafa adulta!",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Quetzalcoatlus%20northropi%20restoration.png",
+        imageSource: "Reconstrução 3D do pterossauro gigante isolado (Wikimedia Commons)",
+        palette: { bg: "#faf5ff", primary: "#581c87", secondary: "#6b21a8", belly: "#7e22ce", accent: "#a855f7" },
+        customArtSvg: `
+          <path d="M 20 80 Q 110 50 160 100 Q 210 50 300 80 Q 220 130 160 120 Q 100 130 20 80 Z" fill="url(#accentGrad-6A)" stroke="#3b0764" stroke-width="2"/>
+          <ellipse cx="160" cy="115" rx="14" ry="22" fill="#581c87"/>
+          <path d="M 160 105 Q 165 60 170 30" stroke="#6b21a8" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <polygon points="166,32 174,32 172,2 168,2" fill="#facc15"/>
+          <circle cx="168" cy="28" r="2" fill="#000000"/>
+        `
+      },
+      {
+        id: "6B",
+        name: "Pteranodonte",
+        scientificName: "Pteranodon longiceps",
+        nameMeaning: "Asa desdentada de cabeça longa",
+        group: "6",
+        groupName: "Pterossauros",
+        colorClass: "bg-purple-50 border-purple-200 text-purple-950",
+        badgeBg: "bg-purple-100 text-purple-800",
+        superTrunfo: false,
+        height: 1.8, length: 6.5, weight: 45, speed: 85, period: 85,
+        keyFeature: "Crista craniana retrovertida aerodinâmica e bico sem dentes especializado em pesca costeira.",
+        curiosity: "Planava por centenas de quilômetros sobre oceanos rasos para apanhar peixes com o bico córneo.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Pteranodon%20longiceps%20restoration.jpg",
+        imageSource: "Reconstrução paleoartística isolada com fundo branco (Wikimedia Commons)",
+        palette: { bg: "#faf5ff", primary: "#6b21a8", secondary: "#7e22ce", belly: "#9333ea", accent: "#c084fc" },
+        customArtSvg: `
+          <path d="M 30 90 Q 110 65 160 110 Q 210 65 290 90 Q 210 135 160 125 Q 110 135 30 90 Z" fill="url(#bodyGrad-6B)"/>
+          <ellipse cx="160" cy="118" rx="12" ry="18" fill="#581c87"/>
+          <path d="M 158 90 L 195 85 L 160 102 Z" fill="#6b21a8"/>
+          <path d="M 158 90 Q 130 75 110 78 Q 135 88 158 95 Z" fill="#c084fc"/>
+          <polygon points="190,85 235,82 195,92" fill="#fbbf24"/>
+        `
+      },
+      {
+        id: "6C",
+        name: "Tupandactylus",
+        scientificName: "Tupandactylus imperator",
+        nameMeaning: "Dedo do trovão imperador",
+        group: "6",
+        groupName: "Pterossauros",
+        colorClass: "bg-purple-50 border-purple-200 text-purple-950",
+        badgeBg: "bg-purple-100 text-purple-800",
+        superTrunfo: false,
+        height: 1.2, length: 4.0, weight: 15, speed: 70, period: 115,
+        keyFeature: "Crista gigantesca em leque vertical que ocupava a maior parte do perfil de sua cabeça.",
+        curiosity: "Fóssil emblemático da Bacia do Araripe no Brasil, com crista craniana gigantesca em formato de leque.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Tupandactylus%20imperator%20life%20restoration.png",
+        imageSource: "Reconstrução 3D isolada do pterossauro brasileiro (Wikimedia Commons)",
+        palette: { bg: "#faf5ff", primary: "#7e22ce", secondary: "#9333ea", belly: "#a855f7", accent: "#f43f5e" },
+        customArtSvg: `
+          <path d="M 40 105 Q 110 80 160 120 Q 210 80 280 105 Q 210 145 160 135 Q 110 145 40 105 Z" fill="url(#bodyGrad-6C)"/>
+          <path d="M 160 100 Q 140 20 185 30 Q 220 50 185 98 Z" fill="url(#accentGrad-6C)" stroke="#581c87" stroke-width="2"/>
+          <polygon points="180,95 220,105 185,108" fill="#facc15"/>
+        `
+      },
+      {
+        id: "6D",
+        name: "Dimorfodonte",
+        scientificName: "Dimorphodon macronyx",
+        nameMeaning: "Dois tipos de dentes de garra grande",
+        group: "6",
+        groupName: "Pterossauros",
+        colorClass: "bg-purple-50 border-purple-200 text-purple-950",
+        badgeBg: "bg-purple-100 text-purple-800",
+        superTrunfo: false,
+        height: 0.6, length: 1.4, weight: 4, speed: 60, period: 195,
+        keyFeature: "Crânio alto e curto parecido com o de um papagaio-do-mar, com cauda longa provida de leme.",
+        curiosity: "Pterossauro primitivo jurássico dotado de dentes afiados para caçar insetos e pequenos lagartos.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Dimorphodon%20macronyx%20restoration.jpg",
+        imageSource: "Reconstrução isolada em fundo neutro (Wikimedia Commons)",
+        palette: { bg: "#faf5ff", primary: "#4a044e", secondary: "#701a75", belly: "#86198f", accent: "#d946ef" },
+        customArtSvg: `
+          <path d="M 50 110 Q 110 95 160 125 Q 210 95 270 110 Q 210 145 160 138 Z" fill="url(#bodyGrad-6D)"/>
+          <line x1="160" y1="135" x2="90" y2="165" stroke="#4a044e" stroke-width="3"/>
+          <polygon points="90,165 80,160 82,172" fill="#d946ef"/>
+          <rect x="175" y="90" width="28" height="22" rx="6" fill="#701a75"/>
+        `
+      },
+
+      // GRUPO 7: Répteis Marinhos
+      {
+        id: "7A",
+        name: "Mosasauro",
+        scientificName: "Mosasaurus hoffmannii",
+        nameMeaning: "Lagarto do rio Mosa",
+        group: "7",
+        groupName: "Répteis Marinhos",
+        colorClass: "bg-teal-50 border-teal-200 text-teal-950",
+        badgeBg: "bg-teal-100 text-teal-800",
+        superTrunfo: false,
+        height: 2.5, length: 17.0, weight: 14000, speed: 48, period: 70,
+        keyFeature: "Cauda bilobada potente como a de tubarão e mandíbulas duplas com dentes pterigóides para segurar presas escorregadias.",
+        curiosity: "Lagarto marinho gigante ancestral dos varanídeos modernos, dotado de fileira extra de dentes pterigóides.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Mosasaurus%20hoffmannii%20life%20restoration.jpg",
+        imageSource: "Modelo anatômico marinho isolado em fundo limpo (Wikimedia Commons)",
+        palette: { bg: "#f0fdfa", primary: "#115e59", secondary: "#0f766e", belly: "#14b8a6", accent: "#5eead4" },
+        customArtSvg: `
+          <path d="M 10 160 Q 80 150 160 160 T 310 160" stroke="#ccfbf1" stroke-width="4" fill="none"/>
+          <path d="M 40 110 Q 30 85 15 80 Q 25 110 35 125 Q 15 145 10 155 Q 35 135 55 125 Z" fill="#115e59"/>
+          <path d="M 50 120 Q 120 100 180 110 Q 240 100 280 115 Q 230 135 160 130 Q 90 135 50 120 Z" fill="url(#bodyGrad-7A)"/>
+          <polygon points="170,125 150,155 165,158 185,130" fill="#0f766e"/>
+          <polygon points="105,122 90,145 102,148 115,125" fill="#115e59"/>
+          <polygon points="250,110 295,116 260,128" fill="#115e59"/>
+          <circle cx="265" cy="112" r="2.5" fill="#facc15"/>
+        `
+      },
+      {
+        id: "7B",
+        name: "Plesiossauro",
+        scientificName: "Plesiosaurus dolichodeirus",
+        nameMeaning: "Próximo a lagarto de pescoço longo",
+        group: "7",
+        groupName: "Répteis Marinhos",
+        colorClass: "bg-teal-50 border-teal-200 text-teal-950",
+        badgeBg: "bg-teal-100 text-teal-800",
+        superTrunfo: false,
+        height: 1.5, length: 4.5, weight: 800, speed: 35, period: 180,
+        keyFeature: "Pescoço esguio em forma de cobra com até 40 vértebras e 4 nadadeiras em forma de asa.",
+        curiosity: "Navegava batendo quatro nadadeiras como se voasse debaixo d'água, emboscando peixes com o pescoço sinuoso.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Plesiosaurus%20dolichodeirus%20life%20restoration.png",
+        imageSource: "Reconstrução 3D isolada com fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#f0fdfa", primary: "#134e4a", secondary: "#0d9488", belly: "#2dd4bf", accent: "#99f6e4" },
+        customArtSvg: `
+          <ellipse cx="140" cy="148" rx="20" ry="8" fill="#0d9488" transform="rotate(35 140 148)"/>
+          <ellipse cx="100" cy="146" rx="18" ry="7" fill="#134e4a" transform="rotate(35 100 146)"/>
+          <ellipse cx="120" cy="132" rx="36" ry="18" fill="url(#bodyGrad-7B)"/>
+          <path d="M 148 128 Q 190 120 215 90 Q 235 60 250 45" stroke="#0d9488" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <ellipse cx="255" cy="42" rx="9" ry="5" fill="#134e4a"/>
+          <circle cx="257" cy="40" r="1.5" fill="#facc15"/>
+        `
+      },
+      {
+        id: "7C",
+        name: "Ictiossauro",
+        scientificName: "Ichthyosaurus communis",
+        nameMeaning: "Lagarto peixe comum",
+        group: "7",
+        groupName: "Répteis Marinhos",
+        colorClass: "bg-teal-50 border-teal-200 text-teal-950",
+        badgeBg: "bg-teal-100 text-teal-800",
+        superTrunfo: false,
+        height: 1.0, length: 3.2, weight: 420, speed: 55, period: 190,
+        keyFeature: "Formato perfeitamente fusiforme de golfinho com olhos enormes protegidos por anel esclerótico.",
+        curiosity: "Exemplo magistral de evolução convergente: réptil com formato hidrodinâmico idêntico ao de golfinhos e atuns.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Ichthyosaurus%20communis%20restoration.jpg",
+        imageSource: "Reconstrução paleoartística isolada em fundo neutro (Wikimedia Commons)",
+        palette: { bg: "#f0fdfa", primary: "#0f766e", secondary: "#14b8a6", belly: "#5eead4", accent: "#a5f3fc" },
+        customArtSvg: `
+          <polygon points="140,110 155,80 165,110" fill="#0f766e"/>
+          <path d="M 45 125 Q 25 100 15 90 Q 28 125 15 155 Q 30 140 45 125 Z" fill="#0f766e"/>
+          <ellipse cx="150" cy="125" rx="55" ry="22" fill="url(#bodyGrad-7C)"/>
+          <polygon points="160,132 145,158 158,158 175,135" fill="#14b8a6"/>
+          <polygon points="200,120 270,123 200,130" fill="#0f766e"/>
+          <circle cx="215" cy="122" r="6" fill="#ffffff" stroke="#0f766e" stroke-width="1.5"/>
+          <circle cx="215" cy="122" r="3" fill="#000000"/>
+        `
+      },
+      {
+        id: "7D",
+        name: "Liopleurodon",
+        scientificName: "Liopleurodon ferox",
+        nameMeaning: "Dente de lados lisos feroz",
+        group: "7",
+        groupName: "Répteis Marinhos",
+        colorClass: "bg-teal-50 border-teal-200 text-teal-950",
+        badgeBg: "bg-teal-100 text-teal-800",
+        superTrunfo: false,
+        height: 1.8, length: 7.0, weight: 3600, speed: 40, period: 160,
+        keyFeature: "Crânio colossal e compacto de 2m dotado de narinas esterioscópicas para caça olfativa submarina.",
+        curiosity: "Superpredador pliosaurídeo jurássico; suas narinas conseguiam farejar fontes de odor no mar profundo.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Liopleurodon%20ferox%20restoration.png",
+        imageSource: "Reconstrução 3D do pliosauro isolada com fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#f0fdfa", primary: "#042f2e", secondary: "#115e59", belly: "#134e4a", accent: "#2dd4bf" },
+        customArtSvg: `
+          <ellipse cx="130" cy="130" rx="42" ry="22" fill="url(#bodyGrad-7D)"/>
+          <polygon points="140,135 125,168 142,168 160,138" fill="#115e59"/>
+          <polygon points="90,135 75,165 90,165 105,138" fill="#042f2e"/>
+          <polygon points="165,115 260,126 235,145 165,138" fill="#042f2e"/>
+          <circle cx="215" cy="122" r="3" fill="#facc15"/>
+        `
+      },
+
+      // GRUPO 8: Dromeossauros & Penados
+      {
+        id: "8A",
+        name: "Velociraptor",
+        scientificName: "Velociraptor mongoliensis",
+        nameMeaning: "Ladrão veloz da Mongólia",
+        group: "8",
+        groupName: "Dromeossaurídeos",
+        colorClass: "bg-orange-50 border-orange-200 text-orange-950",
+        badgeBg: "bg-orange-100 text-orange-800",
+        superTrunfo: false,
+        height: 0.5, length: 2.0, weight: 18, speed: 64, period: 73,
+        keyFeature: "Plumagem completa estilo ave de rapina e garra em foice curva e retrátil no segundo dedo do pé.",
+        curiosity: "Tinha plumagem completa pelo corpo e uma garra curva e retrátil usada para prender presas no chão.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Velociraptor%20TD.png",
+        imageSource: "Reconstrução anatômica 3D isolada com fundo transparente (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#fff7ed", primary: "#9a3412", secondary: "#c2410c", belly: "#ea580c", accent: "#fdba74" },
+        customArtSvg: `
+          <line x1="45" y1="130" x2="115" y2="125" stroke="#9a3412" stroke-width="6"/>
+          <path d="M 45 130 L 30 120 L 45 138 Z" fill="#ea580c"/>
+          <ellipse cx="145" cy="122" rx="32" ry="18" fill="url(#bodyGrad-8A)"/>
+          <path d="M 155 122 Q 175 130 185 145 Q 165 145 155 132 Z" fill="#ea580c"/>
+          <path d="M 125 125 L 120 155 L 110 180" stroke="#7c2d12" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M 148 125 L 145 158 L 138 180" stroke="#9a3412" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <path d="M 138 175 Q 132 165 136 160" stroke="#fef08a" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <polygon points="175,110 230,112 215,124 175,122" fill="#9a3412"/>
+          <circle cx="200" cy="113" r="2.5" fill="#facc15"/>
+        `
+      },
+      {
+        id: "8B",
+        name: "Deinonico",
+        scientificName: "Deinonychus antirrhopus",
+        nameMeaning: "Garra terrível com contrapeso",
+        group: "8",
+        groupName: "Dromeossaurídeos",
+        colorClass: "bg-orange-50 border-orange-200 text-orange-950",
+        badgeBg: "bg-orange-100 text-orange-800",
+        superTrunfo: false,
+        height: 1.0, length: 3.4, weight: 80, speed: 50, period: 110,
+        keyFeature: "Garra de foice de 13 cm hipertrofiada e tendões ósseos na cauda atuando como contrapeso dinâmico.",
+        curiosity: "Sua descoberta em 1969 comprovou que dinossauros eram animais ágeis, endotérmicos e parentes próximos das aves.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Deinonychus%20antirrhopus%20restoration.png",
+        imageSource: "Reconstrução anatômica isolada em fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#fff7ed", primary: "#7c2d12", secondary: "#9a3412", belly: "#c2410c", accent: "#fb923c" },
+        customArtSvg: `
+          <line x1="45" y1="132" x2="115" y2="125" stroke="#7c2d12" stroke-width="7"/>
+          <ellipse cx="145" cy="122" rx="34" ry="20" fill="url(#bodyGrad-8B)"/>
+          <path d="M 148 125 L 145 158 L 138 180" stroke="#7c2d12" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M 138 174 Q 130 160 135 155" stroke="#facc15" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <polygon points="175,110 235,114 218,126 175,124" fill="#9a3412"/>
+          <circle cx="205" cy="114" r="2.5" fill="#facc15"/>
+        `
+      },
+      {
+        id: "8C",
+        name: "Microraptor",
+        scientificName: "Microraptor gui",
+        nameMeaning: "Pequeno ladrão de Gu",
+        group: "8",
+        groupName: "Dromeossaurídeos",
+        colorClass: "bg-orange-50 border-orange-200 text-orange-950",
+        badgeBg: "bg-orange-100 text-orange-800",
+        superTrunfo: false,
+        height: 0.3, length: 0.8, weight: 1, speed: 45, period: 120,
+        keyFeature: "Quatro asas com longas penas de voo tanto nos braços quanto nas pernas traseiras para planar entre árvores.",
+        curiosity: "Dinossauro de quatro asas com penas de voo nos braços e pernas; fósseis revelam que tinha penas pretas iridescentes.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Microraptor%20gui%20restoration.jpg",
+        imageSource: "Reconstrução paleoartística isolada com fundo limpo (Wikimedia Commons)",
+        palette: { bg: "#fff7ed", primary: "#18181b", secondary: "#27272a", belly: "#3f3f46", accent: "#38bdf8" },
+        customArtSvg: `
+          <ellipse cx="160" cy="110" rx="55" ry="14" fill="#18181b" transform="rotate(-15 160 110)"/>
+          <ellipse cx="130" cy="135" rx="38" ry="10" fill="#27272a" transform="rotate(-10 130 135)"/>
+          <ellipse cx="150" cy="118" rx="20" ry="10" fill="#38bdf8" opacity="0.4"/>
+          <line x1="60" y1="145" x2="120" y2="125" stroke="#18181b" stroke-width="3"/>
+          <polygon points="60,145 45,140 48,152" fill="#18181b"/>
+          <circle cx="180" cy="108" r="2" fill="#facc15"/>
+        `
+      },
+      {
+        id: "8D",
+        name: "Utahraptor",
+        scientificName: "Utahraptor ostrommaysi",
+        nameMeaning: "Ladrão de Utah",
+        group: "8",
+        groupName: "Dromeossaurídeos",
+        colorClass: "bg-orange-50 border-orange-200 text-orange-950",
+        badgeBg: "bg-orange-100 text-orange-800",
+        superTrunfo: false,
+        height: 1.8, length: 6.0, weight: 520, speed: 45, period: 128,
+        keyFeature: "Porte gigante de urso pardo com garra de foice brutal de 24 cm e ossos muito mais espessos.",
+        curiosity: "O colosso da família raptor: pesava meia tonelada e sua foice de ataque media mais de 24 centímetros!",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Utahraptor%20ostrommaysi%20restoration.png",
+        imageSource: "Reconstrução anatômica isolada em fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#fff7ed", primary: "#431407", secondary: "#7c2d12", belly: "#9a3412", accent: "#ea580c" },
+        customArtSvg: `
+          <line x1="40" y1="135" x2="115" y2="125" stroke="#431407" stroke-width="10"/>
+          <ellipse cx="150" cy="120" rx="42" ry="25" fill="url(#bodyGrad-8D)"/>
+          <path d="M 152 125 L 148 158 L 138 180" stroke="#431407" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <path d="M 138 174 Q 125 152 135 146" stroke="#facc15" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+          <polygon points="185,105 250,110 235,128 185,124" fill="#7c2d12"/>
+          <circle cx="218" cy="112" r="3" fill="#facc15"/>
+        `
+      },
+
+      // GRUPO 9: Formas Exóticas & Especialistas
+      {
+        id: "9A",
+        name: "Terizinossauro",
+        scientificName: "Therizinosaurus cheloniformis",
+        nameMeaning: "Lagarto ceifador em forma de tartaruga",
+        group: "9",
+        groupName: "Formas Exóticas",
+        colorClass: "bg-amber-50 border-amber-200 text-amber-950",
+        badgeBg: "bg-amber-100 text-amber-800",
+        superTrunfo: false,
+        height: 5.0, length: 10.0, weight: 5000, speed: 22, period: 70,
+        keyFeature: "Três garras em lâmina de foice de 1 metro nos membros anteriores, as maiores do reino animal.",
+        curiosity: "Terópode herbívoro que ostentava as maiores garras do reino animal: foices ósseas de até 1 metro de comprimento!",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Therizinosaurus%20TD.png",
+        imageSource: "Reconstrução 3D anatômica isolada em fundo transparente (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#fffbeb", primary: "#713f12", secondary: "#854d0e", belly: "#a16207", accent: "#fef08a" },
+        customArtSvg: `
+          <ellipse cx="140" cy="130" rx="44" ry="32" fill="url(#bodyGrad-9A)"/>
+          <path d="M 115 140 L 110 180" stroke="#713f12" stroke-width="14" stroke-linecap="round" fill="none"/>
+          <path d="M 160 140 L 160 180" stroke="#854d0e" stroke-width="14" stroke-linecap="round" fill="none"/>
+          <path d="M 175 120 Q 200 80 215 50" stroke="#854d0e" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <ellipse cx="220" cy="46" rx="9" ry="6" fill="#713f12"/>
+          <path d="M 180 125 L 210 145" stroke="#713f12" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M 210 145 Q 235 158 245 180" stroke="#fef08a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <path d="M 210 145 Q 238 150 252 170" stroke="#fef08a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <path d="M 210 145 Q 242 140 258 158" stroke="#fef08a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        `
+      },
+      {
+        id: "9B",
+        name: "Carnotauro",
+        scientificName: "Carnotaurus sastrei",
+        nameMeaning: "Touro carnívoro de Sastre",
+        group: "9",
+        groupName: "Formas Exóticas",
+        colorClass: "bg-amber-50 border-amber-200 text-amber-950",
+        badgeBg: "bg-amber-100 text-amber-800",
+        superTrunfo: false,
+        height: 3.0, length: 7.8, weight: 1500, speed: 50, period: 71,
+        keyFeature: "Par de chifres frontais triangulares sobre os olhos e musculatura caudal focada em arrancadas velocíssimas.",
+        curiosity: "Velocista com chifres frontais robustos e braços diminutos; um dos predadores mais rápidos do Cretáceo.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Carnotaurus%20TD.png",
+        imageSource: "Reconstrução paleoartística isolada com fundo transparente (Wikimedia Commons / TotalDino)",
+        palette: { bg: "#fffbeb", primary: "#831843", secondary: "#9d174d", belly: "#be185d", accent: "#fb7185" },
+        customArtSvg: `
+          <path d="M 40 142 Q 85 128 125 122" stroke="#831843" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <ellipse cx="155" cy="118" rx="42" ry="22" fill="url(#bodyGrad-9B)"/>
+          <path d="M 125 122 L 120 155 L 110 180" stroke="#701a35" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 158 120 L 152 155 L 140 180" stroke="#831843" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <polygon points="190,110 245,100 240,122 195,122" fill="#9d174d"/>
+          <polygon points="218,103 222,86 228,102" fill="#facc15"/>
+          <circle cx="225" cy="108" r="2.5" fill="#000000"/>
+        `
+      },
+      {
+        id: "9C",
+        name: "Deinoqueiro",
+        scientificName: "Deinocheirus mirificus",
+        nameMeaning: "Mão terrível e incomum",
+        group: "9",
+        groupName: "Formas Exóticas",
+        colorClass: "bg-amber-50 border-amber-200 text-amber-950",
+        badgeBg: "bg-amber-100 text-amber-800",
+        superTrunfo: false,
+        height: 4.4, length: 11.0, weight: 6400, speed: 24, period: 70,
+        keyFeature: "Bico achatado de pato, vela dorsal corcunda e braços de 2,4m com garras recurvadas.",
+        curiosity: "Bizarro ornitomimossauro gigante com bico largo de pato, vela nas costas e braços colossais com garras recurvadas.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Deinocheirus%20mirificus%20life%20restoration.png",
+        imageSource: "Reconstrução paleoartística isolada em fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#fffbeb", primary: "#451a03", secondary: "#78350f", belly: "#92400e", accent: "#d97706" },
+        customArtSvg: `
+          <path d="M 130 115 Q 155 70 180 115 Z" fill="#d97706"/>
+          <ellipse cx="150" cy="125" rx="44" ry="26" fill="url(#bodyGrad-9C)"/>
+          <path d="M 120 135 L 115 180" stroke="#451a03" stroke-width="13" stroke-linecap="round" fill="none"/>
+          <path d="M 165 135 L 165 180" stroke="#78350f" stroke-width="13" stroke-linecap="round" fill="none"/>
+          <path d="M 185 118 L 245 112 L 255 125 L 195 130 Z" fill="#78350f"/>
+        `
+      },
+      {
+        id: "9D",
+        name: "Barionix",
+        scientificName: "Baryonyx walkeri",
+        nameMeaning: "Garra pesada de Walker",
+        group: "9",
+        groupName: "Formas Exóticas",
+        colorClass: "bg-amber-50 border-amber-200 text-amber-950",
+        badgeBg: "bg-amber-100 text-amber-800",
+        superTrunfo: false,
+        height: 2.8, length: 8.5, weight: 1700, speed: 30, period: 125,
+        keyFeature: "Focinho com roseta terminal entalhada e garra curva de 31 cm no primeiro dedo das mãos.",
+        curiosity: "Espinossaurídeo com mandíbulas alongadas semelhantes às de crocodilos para pescar grandes peixes celacantos.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Baryonyx%20walkeri%20life%20restoration.png",
+        imageSource: "Reconstrução paleoartística isolada em fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#fffbeb", primary: "#713f12", secondary: "#a16207", belly: "#ca8a04", accent: "#fef08a" },
+        customArtSvg: `
+          <ellipse cx="150" cy="122" rx="42" ry="22" fill="url(#bodyGrad-9D)"/>
+          <path d="M 120 130 L 115 180" stroke="#713f12" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 160 130 L 160 180" stroke="#a16207" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 185 115 L 260 110 L 255 122 L 190 124 Z" fill="#713f12"/>
+          <path d="M 180 128 L 205 148" stroke="#713f12" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M 205 148 Q 220 152 215 165" stroke="#fef08a" stroke-width="4" stroke-linecap="round" fill="none"/>
+        `
+      },
+
+      // GRUPO 10: Ancestrais Pré-Históricos
+      {
+        id: "10A",
+        name: "Dimetrodon",
+        scientificName: "Dimetrodon grandis",
+        nameMeaning: "Dois tipos de dentes grande",
+        group: "10",
+        groupName: "Ancestrais Pré-Históricos",
+        colorClass: "bg-yellow-50 border-yellow-200 text-yellow-950",
+        badgeBg: "bg-yellow-100 text-yellow-800",
+        superTrunfo: false,
+        height: 1.5, length: 3.5, weight: 250, speed: 20, period: 280,
+        keyFeature: "Vela neural circular suportada por espinhas ósseas alongadas, para aquecimento térmico ao sol matinal.",
+        curiosity: "Não era um dinossauro, mas sim um sinapsídeo pelicossauro, mais parente dos mamíferos do que dos répteis!",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Dimetrodon%20grandis%20restoration.png",
+        imageSource: "Reconstrução 3D isolada do pelicossauro (Wikimedia Commons)",
+        palette: { bg: "#fefce8", primary: "#854d0e", secondary: "#a16207", belly: "#ca8a04", accent: "#eab308" },
+        customArtSvg: `
+          <path d="M 100 135 Q 150 25 200 135 Z" fill="url(#accentGrad-10A)" stroke="#713f12" stroke-width="2"/>
+          <line x1="120" y1="130" x2="125" y2="50" stroke="#fef08a" stroke-width="1.5"/>
+          <line x1="150" y1="130" x2="150" y2="30" stroke="#fef08a" stroke-width="1.5"/>
+          <line x1="180" y1="130" x2="175" y2="50" stroke="#fef08a" stroke-width="1.5"/>
+          <ellipse cx="150" cy="140" rx="46" ry="18" fill="url(#bodyGrad-10A)"/>
+          <path d="M 115 145 L 95 160 L 105 180" stroke="#713f12" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M 175 145 L 195 160 L 185 180" stroke="#854d0e" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <polygon points="190,132 245,135 235,150 190,146" fill="#713f12"/>
+          <circle cx="218" cy="136" r="2.5" fill="#facc15"/>
+        `
+      },
+      {
+        id: "10B",
+        name: "Postosuchus",
+        scientificName: "Postosuchus kirkpatricki",
+        nameMeaning: "Crocodilo de Post (Texas)",
+        group: "10",
+        groupName: "Ancestrais Pré-Históricos",
+        colorClass: "bg-yellow-50 border-yellow-200 text-yellow-950",
+        badgeBg: "bg-yellow-100 text-yellow-800",
+        superTrunfo: false,
+        height: 1.3, length: 4.0, weight: 300, speed: 28, period: 215,
+        keyFeature: "Crânio maciço com placas osteodérmicas no dorso e postura ereta semi-bípede pré-dinossauro.",
+        curiosity: "Arquossauro couraçado que dominava o topo da cadeia alimentar antes dos dinossauros se tornarem gigantes.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Postosuchus%20kirkpatricki%20restoration.png",
+        imageSource: "Reconstrução do predador triássico isolada (Wikimedia Commons)",
+        palette: { bg: "#fefce8", primary: "#78350f", secondary: "#92400e", belly: "#b45309", accent: "#f59e0b" },
+        customArtSvg: `
+          <ellipse cx="150" cy="130" rx="42" ry="22" fill="url(#bodyGrad-10B)"/>
+          <path d="M 120 135 L 115 180" stroke="#78350f" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 165 135 L 165 180" stroke="#92400e" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <polygon points="185,120 245,122 235,138 185,135" fill="#78350f"/>
+        `
+      },
+      {
+        id: "10C",
+        name: "Gorgonops",
+        scientificName: "Gorgonops torvus",
+        nameMeaning: "Olhar feroz de Górgona",
+        group: "10",
+        groupName: "Ancestrais Pré-Históricos",
+        colorClass: "bg-yellow-50 border-yellow-200 text-yellow-950",
+        badgeBg: "bg-yellow-100 text-yellow-800",
+        superTrunfo: false,
+        height: 1.1, length: 2.5, weight: 200, speed: 36, period: 255,
+        keyFeature: "Caninos em sabre gigantescos saindo da mandíbula superior antes de qualquer felino existir.",
+        curiosity: "Sinapsídeo predador do Permiano dotado dos primeiros dentes-de-sabre verdadeiros da história fóssil.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Gorgonops%20torvus%20restoration.png",
+        imageSource: "Reconstrução do gorgonopsídeo isolada em fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#fefce8", primary: "#713f12", secondary: "#a16207", belly: "#ca8a04", accent: "#fde047" },
+        customArtSvg: `
+          <ellipse cx="145" cy="132" rx="40" ry="20" fill="url(#bodyGrad-10C)"/>
+          <path d="M 115 140 L 110 180" stroke="#713f12" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 165 140 L 165 180" stroke="#a16207" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <polygon points="180,125 235,128 225,145 180,140" fill="#713f12"/>
+          <polygon points="215,135 220,158 223,135" fill="#ffffff"/>
+        `
+      },
+      {
+        id: "10D",
+        name: "Desmatosuchus",
+        scientificName: "Desmatosuchus spurensis",
+        nameMeaning: "Crocodilo de ligação de Spur",
+        group: "10",
+        groupName: "Ancestrais Pré-Históricos",
+        colorClass: "bg-yellow-50 border-yellow-200 text-yellow-950",
+        badgeBg: "bg-yellow-100 text-yellow-800",
+        superTrunfo: false,
+        height: 1.2, length: 4.5, weight: 280, speed: 18, period: 220,
+        keyFeature: "Par de espigões escapulares curvados para trás com até 45 cm nas laterais do pescoço.",
+        curiosity: "Aetossauro herbívoro com blindagem pesada e dois gigantescos esporões pontiagudos curvados nos ombros.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Desmatosuchus%20spurensis%20restoration.png",
+        imageSource: "Reconstrução 3D isolada do aetossauro (Wikimedia Commons)",
+        palette: { bg: "#fefce8", primary: "#451a03", secondary: "#78350f", belly: "#b45309", accent: "#fde047" },
+        customArtSvg: `
+          <ellipse cx="150" cy="135" rx="46" ry="22" fill="url(#bodyGrad-10D)"/>
+          <path d="M 180 130 Q 195 95 170 85" stroke="#facc15" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M 115 142 L 110 180" stroke="#451a03" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 165 142 L 165 180" stroke="#78350f" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <polygon points="190,132 240,138 230,148" fill="#451a03"/>
+        `
+      },
+
+      // GRUPO 11: Gigantes Brasileiros 🇧🇷
+      {
+        id: "11A",
+        name: "Oxalaia",
+        scientificName: "Oxalaia quilombensis",
+        nameMeaning: "Divindade Oxalá do Quilombo",
+        group: "11",
+        groupName: "Fósseis Brasileiros",
+        colorClass: "bg-lime-50 border-lime-200 text-lime-950",
+        badgeBg: "bg-lime-100 text-lime-800",
+        superTrunfo: false,
+        height: 4.5, length: 13.0, weight: 7000, speed: 25, period: 98,
+        keyFeature: "Maior carnívoro fóssil do Brasil, com mandíbulas alongadas e dentes canelados típicos do Maranhão.",
+        curiosity: "Maior carnívoro descoberto no Brasil, encontrado na Ilha do Cajual (Maranhão); primo próximo do Espinossauro.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Oxalaia%20quilombensis%20life%20restoration.png",
+        imageSource: "Reconstrução anatômica 3D isolada com fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#f7fee7", primary: "#365314", secondary: "#4d7c0f", belly: "#65a30d", accent: "#a3e635" },
+        customArtSvg: `
+          <path d="M 120 120 Q 155 60 195 115 Z" fill="#65a30d"/>
+          <ellipse cx="155" cy="122" rx="44" ry="24" fill="url(#bodyGrad-11A)"/>
+          <path d="M 125 128 L 120 180" stroke="#365314" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 165 128 L 165 180" stroke="#4d7c0f" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 195 115 L 265 112 Q 275 118 260 124 L 195 124 Z" fill="#365314"/>
+          <circle cx="230" cy="114" r="2.5" fill="#facc15"/>
+        `
+      },
+      {
+        id: "11B",
+        name: "Irritator",
+        scientificName: "Irritator challengeri",
+        nameMeaning: "Irritante (pela restauração) de Challenger",
+        group: "11",
+        groupName: "Fósseis Brasileiros",
+        colorClass: "bg-lime-50 border-lime-200 text-lime-950",
+        badgeBg: "bg-lime-100 text-lime-800",
+        superTrunfo: false,
+        height: 2.6, length: 8.0, weight: 1400, speed: 32, period: 110,
+        keyFeature: "Articulação mandibular única que permitia alargar a boca lateralmente para deglutir peixes inteiros no Ceará.",
+        curiosity: "Fóssil do Ceará que abria a mandíbula para os lados para engolir peixes inteiros, como os pelicanos atuais.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Irritator%20challengeri%20life%20restoration.png",
+        imageSource: "Reconstrução paleoartística isolada em fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#f7fee7", primary: "#3f6212", secondary: "#4d7c0f", belly: "#65a30d", accent: "#bef264" },
+        customArtSvg: `
+          <ellipse cx="150" cy="122" rx="40" ry="22" fill="url(#bodyGrad-11B)"/>
+          <path d="M 120 130 L 115 180" stroke="#3f6212" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M 160 130 L 160 180" stroke="#4d7c0f" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <polygon points="185,112 255,108 245,125 185,124" fill="#3f6212"/>
+          <polygon points="215,104 220,95 225,104" fill="#a3e635"/>
+        `
+      },
+      {
+        id: "11C",
+        name: "Buriolestes",
+        scientificName: "Buriolestes schultzi",
+        nameMeaning: "Ladrão do sítio da família Buriol",
+        group: "11",
+        groupName: "Fósseis Brasileiros",
+        colorClass: "bg-lime-50 border-lime-200 text-lime-950",
+        badgeBg: "bg-lime-100 text-lime-800",
+        superTrunfo: false,
+        height: 0.5, length: 1.5, weight: 7, speed: 42, period: 233,
+        keyFeature: "Dentes curvados e carnívoros no mais antigo ancestral da linhagem dos gigantescos pescoçudos no RS.",
+        curiosity: "Descoberto no Rio Grande do Sul, é um dos mais antigos dinossauros do planeta; ancestral carnívoro dos gigantescos saurópodes!",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Buriolestes%20schultzi%20restoration.png",
+        imageSource: "Reconstrução 3D isolada de Buriolestes (CAPPA/UFSM - Wikimedia Commons)",
+        palette: { bg: "#f7fee7", primary: "#14532d", secondary: "#166534", belly: "#15803d", accent: "#86efac" },
+        customArtSvg: `
+          <ellipse cx="145" cy="125" rx="30" ry="16" fill="url(#bodyGrad-11C)"/>
+          <path d="M 125 130 L 120 180" stroke="#14532d" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <path d="M 155 130 L 155 180" stroke="#166534" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <polygon points="170,115 218,118 208,128" fill="#14532d"/>
+        `
+      },
+      {
+        id: "11D",
+        name: "Austroposeidon",
+        scientificName: "Austroposeidon magnificus",
+        nameMeaning: "Poseidon do Sul magnífico",
+        group: "11",
+        groupName: "Fósseis Brasileiros",
+        colorClass: "bg-lime-50 border-lime-200 text-lime-950",
+        badgeBg: "bg-lime-100 text-lime-800",
+        superTrunfo: false,
+        height: 8.0, length: 25.0, weight: 35000, speed: 12, period: 84,
+        keyFeature: "Vértebras com anéis de osso denso intercalados com tecido esponjoso, o maior dinossauro do Brasil.",
+        curiosity: "Maior dinossauro já desenterrado em solo brasileiro (Presidente Prudente - SP), verdadeiro titã dos pampas e cerrados ancestrais.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Austroposeidon%20magnificus%20restoration.png",
+        imageSource: "Museu Nacional / UFRJ - Reconstrução do gigante paulista isolada",
+        palette: { bg: "#f7fee7", primary: "#164e63", secondary: "#0e7490", belly: "#06b6d4", accent: "#67e8f9" },
+        customArtSvg: `
+          <ellipse cx="150" cy="130" rx="50" ry="32" fill="url(#bodyGrad-11D)"/>
+          <path d="M 115 140 L 110 180" stroke="#164e63" stroke-width="16" stroke-linecap="round" fill="none"/>
+          <path d="M 175 140 L 175 180" stroke="#0e7490" stroke-width="16" stroke-linecap="round" fill="none"/>
+          <path d="M 195 120 Q 235 75 255 45" stroke="#0e7490" stroke-width="16" stroke-linecap="round" fill="none"/>
+          <ellipse cx="260" cy="42" rx="12" ry="7" fill="#164e63"/>
+        `
+      },
+
+      // GRUPO 12: Megafauna Cenozoica & Era do Gelo
+      {
+        id: "12A",
+        name: "Tigre-Dente-de-Sabre",
+        scientificName: "Smilodon populator",
+        nameMeaning: "Dente de faca devastador",
+        group: "12",
+        groupName: "Megafauna Cenozoica",
+        colorClass: "bg-indigo-50 border-indigo-200 text-indigo-950",
+        badgeBg: "bg-indigo-100 text-indigo-800",
+        superTrunfo: false,
+        height: 1.3, length: 2.6, weight: 400, speed: 45, period: 0.01,
+        keyFeature: "Caninos superiores curvados de 28 cm em forma de lâmina e patas dianteiras com musculatura de lutador.",
+        curiosity: "Predador supremo da América do Sul com caninos curvados de quase 30 cm que abriam em um ângulo de até 120 graus!",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Smilodon%20populator%20life%20restoration.png",
+        imageSource: "Reconstrução paleoartística isolada com fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#eef2ff", primary: "#312e81", secondary: "#3730a3", belly: "#4338ca", accent: "#fef08a" },
+        customArtSvg: `
+          <path d="M 65 140 Q 85 138 105 135" stroke="#312e81" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <ellipse cx="145" cy="130" rx="38" ry="24" fill="url(#bodyGrad-12A)"/>
+          <path d="M 115 138 L 110 180" stroke="#312e81" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M 165 135 L 165 180" stroke="#3730a3" stroke-width="13" stroke-linecap="round" fill="none"/>
+          <ellipse cx="195" cy="115" rx="16" ry="12" fill="#312e81"/>
+          <polygon points="198,122 201,148 205,122" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+          <circle cx="192" cy="112" r="2.5" fill="#facc15"/>
+        `
+      },
+      {
+        id: "12B",
+        name: "Mamute-Lanoso",
+        scientificName: "Mammuthus primigenius",
+        nameMeaning: "Monstro de terra primevo",
+        group: "12",
+        groupName: "Megafauna Cenozoica",
+        colorClass: "bg-indigo-50 border-indigo-200 text-indigo-950",
+        badgeBg: "bg-indigo-100 text-indigo-800",
+        superTrunfo: false,
+        height: 3.5, length: 5.5, weight: 6000, speed: 30, period: 0.004,
+        keyFeature: "Presas de marfim espiraladas de mais de 3m e pelagem espessa dupla para resistir à estepe fria.",
+        curiosity: "Adaptado ao frio glacial com espessa camada de gordura e presas helicoidais para varrer a neve da vegetação.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Mammuthus%20primigenius%20life%20restoration.png",
+        imageSource: "Reconstrução 3D do mamute isolada com fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#eef2ff", primary: "#1e1b4b", secondary: "#312e81", belly: "#4338ca", accent: "#fef08a" },
+        customArtSvg: `
+          <ellipse cx="165" cy="105" rx="18" ry="14" fill="#312e81"/>
+          <ellipse cx="145" cy="125" rx="44" ry="32" fill="url(#bodyGrad-12B)"/>
+          <path d="M 115 138 L 110 180" stroke="#1e1b4b" stroke-width="14" stroke-linecap="round" fill="none"/>
+          <path d="M 175 135 L 175 180" stroke="#312e81" stroke-width="14" stroke-linecap="round" fill="none"/>
+          <path d="M 200 115 Q 215 140 210 170" stroke="#1e1b4b" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M 195 125 Q 240 155 240 115" stroke="#fef08a" stroke-width="5" stroke-linecap="round" fill="none"/>
+        `
+      },
+      {
+        id: "12C",
+        name: "Preguiça-Gigante",
+        scientificName: "Megatherium americanum",
+        nameMeaning: "Grande besta americana",
+        group: "12",
+        groupName: "Megafauna Cenozoica",
+        colorClass: "bg-indigo-50 border-indigo-200 text-indigo-950",
+        badgeBg: "bg-indigo-100 text-indigo-800",
+        superTrunfo: false,
+        height: 4.0, length: 6.0, weight: 4000, speed: 10, period: 0.01,
+        keyFeature: "Pélvis colossal e garras curvas que permitiam ficar em pé sobre as duas patas traseiras.",
+        curiosity: "Alcançava folhas no topo de árvores apoiando-se nas patas traseiras e possuía ossos reforçados para escavar tocas imensas.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Megatherium%20americanum%20life%20restoration.png",
+        imageSource: "Reconstrução 3D isolada da preguiça-gigante (Wikimedia Commons)",
+        palette: { bg: "#eef2ff", primary: "#3730a3", secondary: "#4338ca", belly: "#4f46e5", accent: "#c7d2fe" },
+        customArtSvg: `
+          <ellipse cx="145" cy="128" rx="42" ry="36" fill="url(#bodyGrad-12C)"/>
+          <path d="M 120 145 L 115 182" stroke="#3730a3" stroke-width="18" stroke-linecap="round" fill="none"/>
+          <path d="M 160 145 L 160 182" stroke="#4338ca" stroke-width="18" stroke-linecap="round" fill="none"/>
+          <ellipse cx="170" cy="85" rx="14" ry="12" fill="#3730a3"/>
+          <path d="M 175 110 L 210 115" stroke="#3730a3" stroke-width="10" stroke-linecap="round" fill="none"/>
+        `
+      },
+      {
+        id: "12D",
+        name: "Ave-do-Terror",
+        scientificName: "Titanis walleri",
+        nameMeaning: "Titã de Waller",
+        group: "12",
+        groupName: "Megafauna Cenozoica",
+        colorClass: "bg-indigo-50 border-indigo-200 text-indigo-950",
+        badgeBg: "bg-indigo-100 text-indigo-800",
+        superTrunfo: false,
+        height: 2.5, length: 2.2, weight: 150, speed: 65, period: 1.8,
+        keyFeature: "Bico em gancho cortante como o de uma águia gigante acoplado a pernas longas de avestruz veloz.",
+        curiosity: "Ave predadora não voadora com bico maciço e cortante em forma de machado, veloz corredora de planícies.",
+        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Titanis%20walleri%20life%20restoration.png",
+        imageSource: "Reconstrução paleoartística isolada em fundo transparente (Wikimedia Commons)",
+        palette: { bg: "#eef2ff", primary: "#312e81", secondary: "#4338ca", belly: "#6366f1", accent: "#f59e0b" },
+        customArtSvg: `
+          <ellipse cx="140" cy="120" rx="26" ry="18" fill="url(#bodyGrad-12D)"/>
+          <path d="M 130 130 L 125 180" stroke="#312e81" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M 150 130 L 150 180" stroke="#4338ca" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M 155 115 Q 165 75 175 55" stroke="#4338ca" stroke-width="9" stroke-linecap="round" fill="none"/>
+          <path d="M 172 55 L 215 58 L 205 75 L 170 70 Z" fill="#312e81"/>
+          <path d="M 215 58 Q 222 68 215 78" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" fill="none"/>
+        `
+      }
+    ];
+
+    /* --- SISTEMA DE SÍNTESE DE ÁUDIO GENTIL (WEB AUDIO API) --- */
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) audioCtx = new AudioContext();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playGentleWinSound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+
+          gain.gain.setValueAtTime(0, now + idx * 0.08);
+          gain.gain.linearRampToValueAtTime(0.08, now + idx * 0.08 + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 0.5);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.6);
+        });
+      } catch(e) {}
+    }
+
+    function playGentleTrySound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(392.00, now);
+        osc.frequency.exponentialRampToValueAtTime(329.63, now + 0.25);
+
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.4);
+      } catch(e) {}
+    }
+
+    function playClickSound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(440, now);
+
+        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.08);
+      } catch(e) {}
+    }
+
+    /* --- SÍNTESE DE VOZ (TEXT-TO-SPEECH) COM FOCO EM ACESSIBILIDADE --- */
+    let ttsEnabled = true;
+    let ttsRate = 0.9;
+
+    function speakText(text) {
+      if (!ttsEnabled || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'pt-BR';
+      utterance.rate = ttsRate;
+      utterance.pitch = 1.0;
+
+      const voices = window.speechSynthesis.getVoices();
+      const ptVoice = voices.find(v => v.lang.includes('pt-BR') || v.lang.includes('pt_BR') || v.lang.includes('pt'));
+      if (ptVoice) utterance.voice = ptVoice;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    /* --- ESTADO DO JOGO --- */
+    let currentComplexity = 'full';
+    let totalRounds = 5;
+    let lastRoundsCount = 5;
+    let currentRoundIndex = 0;
+    let playerScore = 0;
+    let cpuScore = 0;
+    let playerHand = [];
+    let cpuHand = [];
+    let currentPlayerCard = null;
+    let currentCpuCard = null;
+    let isRoundResolved = false;
+
+    /* --- INICIALIZAÇÃO DE PARTIDA --- */
+    function startGame(rounds = 5) {
+      playClickSound();
+      totalRounds = rounds;
+      lastRoundsCount = rounds;
+      currentRoundIndex = 0;
+      playerScore = 0;
+      cpuScore = 0;
+      isRoundResolved = false;
+
+      // Embaralha as 48 espécies
+      const shuffled = [...DINOSAUR_DECK].sort(() => Math.random() - 0.5);
+      
+      playerHand = shuffled.slice(0, rounds);
+      cpuHand = shuffled.slice(rounds, rounds * 2);
+
+      document.getElementById('game-setup-panel').classList.add('hidden');
+      document.getElementById('game-end-panel').classList.add('hidden');
+      document.getElementById('game-arena-panel').classList.remove('hidden');
+
+      loadRound();
+    }
+
+    function resetToSetup() {
+      playClickSound();
+      document.getElementById('game-arena-panel').classList.add('hidden');
+      document.getElementById('game-end-panel').classList.add('hidden');
+      document.getElementById('game-setup-panel').classList.remove('hidden');
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+
+    /* --- CARREGA CADA RODADA --- */
+    function loadRound() {
+      isRoundResolved = false;
+      document.getElementById('round-feedback-box').classList.add('hidden');
+      document.getElementById('cpu-status-tag').textContent = "Aguardando seu lance";
+      document.getElementById('cpu-status-tag').className = "text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-lg";
+
+      currentPlayerCard = playerHand[currentRoundIndex];
+      currentCpuCard = cpuHand[currentRoundIndex];
+
+      document.getElementById('score-player').textContent = playerScore;
+      document.getElementById('score-cpu').textContent = cpuScore;
+      document.getElementById('round-text').textContent = `${currentRoundIndex + 1} de ${totalRounds}`;
+
+      renderProgressPills();
+
+      renderCard('player', currentPlayerCard, false);
+      renderCard('cpu', currentCpuCard, true);
+
+      if (ttsEnabled) {
+        speakText(`Rodada ${currentRoundIndex + 1}. Sua carta é o ${currentPlayerCard.name}, nome científico ${currentPlayerCard.scientificName}. Escolha um atributo.`);
+      }
+    }
+
+    /* --- RENDERIZAÇÃO DE PÍLULAS DE ANTECIPAÇÃO (RODADAS) --- */
+    function renderProgressPills() {
+      const container = document.getElementById('round-indicator-pills');
+      container.innerHTML = '';
+      for (let i = 0; i < totalRounds; i++) {
+        const dot = document.createElement('div');
+        if (i < currentRoundIndex) {
+          dot.className = "w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-sage-500";
+        } else if (i === currentRoundIndex) {
+          dot.className = "w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-sage-700 bg-sage-200 animate-pulse";
+        } else {
+          dot.className = "w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-slate-200";
+        }
+        container.appendChild(dot);
+      }
+    }
+
+    /* --- COMPONENTES VISUAIS DA CARTA COM IMAGEM REALISTA E NOMES --- */
+    function renderCard(target, dino, isCovered) {
+      const container = document.getElementById(`${target}-card-container`);
+      const isPlayer = target === 'player';
+
+      if (isCovered) {
+        container.innerHTML = `
+          <div class="w-full bg-slate-100 border-2 border-dashed border-slate-300 rounded-3xl p-6 flex flex-col items-center justify-center min-h-[460px] text-center shadow-inner">
+            <div class="w-16 h-16 rounded-2xl bg-white/80 border border-slate-200 flex items-center justify-center text-3xl mb-3 shadow-xs">
+      <div id="zoom-art-container" class="w-full h-64 sm:h-72 rounded-2xl bg-gradient-to-b from-white to-slate-100 border border-slate-200 flex items-center justify-center p-3 overflow-hidden relative shadow-inner">
+        <!-- Paleoarte ou Foto da Internet Renderizada Grande -->
+      </div>
+            <p class="font-bold text-slate-700 text-sm">Carta do Robô Amigo</p>
+            <p class="text-xs text-slate-400 mt-1 max-w-[220px]">A espécie e seus atributos serão revelados assim que você escolher a comparação!</p>
+          </div>
+        `;
+        return;
+      }
+
+      const attributes = [
+        { key: 'weight', label: 'Peso', icon: '⚖️', value: dino.weight, unit: 'kg', displayVal: `${dino.weight >= 1000 ? (dino.weight / 1000).toLocaleString('pt-BR') + ' ton' : dino.weight + ' kg'}` },
+        { key: 'length', label: 'Comprimento', icon: '📏', value: dino.length, unit: 'm', displayVal: `${dino.length} m` },
+        { key: 'speed', label: 'Velocidade', icon: '⚡', value: dino.speed, unit: 'km/h', displayVal: `${dino.speed} km/h` },
+      ];
+
+      if (currentComplexity === 'full') {
+        attributes.unshift({ key: 'height', label: 'Altura / Envergadura', icon: '🦒', value: dino.height, unit: 'm', displayVal: `${dino.height} m` });
+        attributes.push({ key: 'period', label: 'Antiguidade', icon: '⏳', value: dino.period, unit: 'Ma', displayVal: `${dino.period} Ma` });
+      }
+
+      let attributesHtml = '';
+      attributes.forEach(attr => {
+        if (isPlayer && !isRoundResolved) {
+          attributesHtml += `
+            <button onclick="compareAttribute('${attr.key}')" class="w-full bg-white hover:bg-sage-100 border-2 border-sage-200 hover:border-sage-400 p-2.5 sm:p-3 rounded-2xl flex items-center justify-between gentle-transition active:scale-[0.98] shadow-xs group">
+              <span class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
+                <span class="text-base">${attr.icon}</span>
+                <span>${attr.label}</span>
+              </span>
+              <span class="text-xs sm:text-sm font-extrabold text-sage-900 bg-sage-50 group-hover:bg-white px-2.5 py-1 rounded-xl border border-sage-200">
+                ${attr.displayVal}
+              </span>
+            </button>
+          `;
+        } else {
+          attributesHtml += `
+            <div id="${target}-attr-${attr.key}" class="w-full bg-white/80 border border-slate-200 p-2.5 sm:p-3 rounded-2xl flex items-center justify-between gentle-transition">
+              <span class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
+                <span class="text-base">${attr.icon}</span>
+                <span>${attr.label}</span>
+              </span>
+              <span class="text-xs sm:text-sm font-extrabold text-slate-800 bg-white px-2 py-0.5 rounded-lg border border-slate-200">
+                ${attr.displayVal}
+              </span>
+            </div>
+          `;
+        }
+      });
+
+      const superTrunfoBadge = dino.superTrunfo 
+        ? `<div class="bg-amber-400 text-amber-950 font-black text-[11px] px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-xs animate-bounce">
+            ⭐ SUPER TRUNFO
+           </div>`
+        : '';
+
+      container.innerHTML = `
+        <div id="${target}-card-box" class="w-full ${dino.colorClass} border-2 rounded-3xl p-4 sm:p-5 flex flex-col gap-3 shadow-sm gentle-transition">
+          
+          <!-- Cabeçalho da Carta -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="font-black text-sm px-2.5 py-0.5 rounded-lg bg-white/90 border border-current shadow-2xs">${dino.id}</span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-lg ${dino.badgeBg}">${dino.groupName}</span>
+            </div>
+            ${superTrunfoBadge}
+          </div>
+
+          <!-- Reconstituição Paleontológica Realista Fiel (Gatilho de Memória) -->
+          <div class="bg-white/80 rounded-2xl p-2.5 border border-current/15 flex flex-col gap-2 overflow-hidden shadow-2xs">
+            <div class="paleo-art-box cursor-pointer group" onclick="openImageZoom('${dino.id}')" title="Clique para ampliar os detalhes anatômicos da espécie">
+              ${getSpeciesVisualHtml(dino, false)}
+              <div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-xs px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-600 border border-slate-200 shadow-2xs flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                🔍 Ampliar
+              </div>
+            </div>
+
+            <!-- Nomes: Popular e Científico com Significado Etimológico -->
+            <div class="text-center px-1">
+              <h3 class="text-base sm:text-lg font-black text-slate-900 tracking-tight leading-snug">${dino.name}</h3>
+              <p class="text-xs font-semibold italic text-slate-600 tracking-wide">${dino.scientificName}</p>
+              <p class="text-[11px] text-slate-500 font-normal">"${dino.nameMeaning}"</p>
+            </div>
+          </div>
+
+          <!-- Atributos -->
+          <div class="flex flex-col gap-1.5 w-full">
+            ${attributesHtml}
+          </div>
+
+          <!-- Curiosidade Científica Calma -->
+          <div class="bg-white/90 border border-slate-200/80 rounded-2xl p-3 text-[11px] text-slate-600 flex items-start gap-2">
+            <span class="text-sm">💡</span>
+            <span class="leading-relaxed"><strong>Você sabia?</strong> ${dino.curiosity}</span>
+          </div>
+
+        </div>
+      `;
+    }
+
+    /* --- LÓGICA DE COMPARAÇÃO DE ATRIBUTO --- */
+    function compareAttribute(selectedKey) {
+      if (isRoundResolved) return;
+      isRoundResolved = true;
+
+      playClickSound();
+
+      // Revela a carta do Robô
+      renderCard('cpu', currentCpuCard, false);
+
+      let winner = null;
+      let reasonText = "";
+
+      if (currentPlayerCard.superTrunfo) {
+        winner = 'player';
+        reasonText = "Sua carta é a SUPER TRUNFO! Vence a rodada com força total!";
+      } else if (currentCpuCard.superTrunfo) {
+        winner = 'cpu';
+        reasonText = "O Robô Amigo jogou a carta SUPER TRUNFO!";
+      } else {
+        const valPlayer = currentPlayerCard[selectedKey];
+        const valCpu = currentCpuCard[selectedKey];
+
+        if (valPlayer > valCpu) {
+          winner = 'player';
+          reasonText = `${currentPlayerCard.name} teve ${valPlayer} contra ${valCpu} do ${currentCpuCard.name}!`;
+        } else if (valPlayer < valCpu) {
+          winner = 'cpu';
+          reasonText = `${currentCpuCard.name} do robô teve ${valCpu} contra ${valPlayer} do seu dinossauro.`;
+        } else {
+          winner = 'draw';
+          reasonText = `Empate científico! Ambas as espécies têm ${valPlayer}.`;
+        }
+      }
+
+      highlightAttributeRow('player', selectedKey, winner === 'player');
+      highlightAttributeRow('cpu', selectedKey, winner === 'cpu');
+
+      const feedbackBox = document.getElementById('round-feedback-box');
+      const feedbackIcon = document.getElementById('feedback-icon');
+      const feedbackTitle = document.getElementById('feedback-title');
+      const feedbackDesc = document.getElementById('feedback-desc');
+      const playerCardBox = document.getElementById('player-card-box');
+
+      feedbackBox.classList.remove('hidden');
+
+      if (winner === 'player') {
+        playerScore++;
+        playGentleWinSound();
+        if (playerCardBox) playerCardBox.classList.add('win-gentle');
+        feedbackIcon.textContent = "🌟";
+        feedbackTitle.textContent = "Parabéns! Ponto para você!";
+        feedbackTitle.className = "font-bold text-base text-emerald-800";
+        feedbackDesc.textContent = reasonText;
+        if (ttsEnabled) speakText(`Muito bem! Você venceu a rodada com o ${currentPlayerCard.name}.`);
+      } else if (winner === 'cpu') {
+        cpuScore++;
+        playGentleTrySound();
+        if (playerCardBox) playerCardBox.classList.add('try-gentle');
+        feedbackIcon.textContent = "🌿";
+        feedbackTitle.textContent = "O Robô pontuou nesta rodada!";
+        feedbackTitle.className = "font-bold text-base text-slate-800";
+        feedbackDesc.textContent = reasonText;
+        if (ttsEnabled) speakText(`O robô pontuou nessa com o ${currentCpuCard.name}.`);
+      } else {
+        playGentleTrySound();
+        feedbackIcon.textContent = "🤝";
+        feedbackTitle.textContent = "Empate amigável!";
+        feedbackTitle.className = "font-bold text-base text-amber-800";
+        feedbackDesc.textContent = reasonText;
+        if (ttsEnabled) speakText(`Houve um empate!`);
+      }
+
+      document.getElementById('score-player').textContent = playerScore;
+      document.getElementById('score-cpu').textContent = cpuScore;
+    }
+
+    function highlightAttributeRow(target, attrKey, isWinner) {
+      const el = document.getElementById(`${target}-attr-${attrKey}`);
+      if (!el) return;
+      if (isWinner) {
+        el.className = "w-full bg-emerald-100 border-2 border-emerald-400 p-2.5 sm:p-3 rounded-2xl flex items-center justify-between font-bold text-emerald-950";
+      } else {
+        el.className = "w-full bg-slate-100 border border-slate-300 p-2.5 sm:p-3 rounded-2xl flex items-center justify-between opacity-80";
+      }
+    }
+
+    /* --- AVANÇO DE RODADA E FINALIZAÇÃO --- */
+    function nextRound() {
+      playClickSound();
+      currentRoundIndex++;
+
+      if (currentRoundIndex < totalRounds) {
+        loadRound();
+      } else {
+        finishGame();
+      }
+    }
+
+    function finishGame() {
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      document.getElementById('game-arena-panel').classList.add('hidden');
+      document.getElementById('game-end-panel').classList.remove('hidden');
+
+      document.getElementById('final-player-score').textContent = playerScore;
+      document.getElementById('final-cpu-score').textContent = cpuScore;
+
+      const endTitle = document.getElementById('end-title');
+      const endDesc = document.getElementById('end-description');
+      const endEmoji = document.getElementById('end-emoji');
+
+      if (playerScore >= cpuScore) {
+        playGentleWinSound();
+        endEmoji.textContent = "🏆";
+        endTitle.textContent = "Missão Cumprida com Brilho!";
+        endDesc.textContent = `Você explorou todas as ${totalRounds} espécies com incrível foco e conquistou ${playerScore} rodadas. Parabéns!`;
+        if (ttsEnabled) speakText(`Parabéns! Você concluiu a partida de ${totalRounds} rodadas com sucesso!`);
+      } else {
+        playGentleTrySound();
+        endEmoji.textContent = "🦕";
+        endTitle.textContent = "Ótima Jornada Paleontológica!";
+        endDesc.textContent = `Você completou todas as ${totalRounds} rodadas planejadas. Cada partida reforça o seu repertório científico.`;
+        if (ttsEnabled) speakText(`Excelente jornada! Todas as ${totalRounds} rodadas foram concluídas.`);
+      }
+    }
+
+    /* --- NARRAÇÃO DA CARTA ATUAL --- */
+    function speakCurrentCard(target) {
+      const card = target === 'player' ? currentPlayerCard : currentCpuCard;
+      if (!card) return;
+      speakText(`${card.name}, nome científico ${card.scientificName}, que significa ${card.nameMeaning}. Do grupo ${card.groupName}. Altura: ${card.height} metros. Comprimento: ${card.length} metros. Peso: ${card.weight} quilos. Velocidade: ${card.speed} quilômetros por hora. Curiosidade: ${card.curiosity}`);
+    }
+
+    /* --- MODO EXPLORAR (ENCICLOPÉDIA DOS 48 DINOS E FÓSSEIS) --- */
+    let currentFilter = 'ALL';
+    let searchQuery = '';
+
+    function renderExploreGrid() {
+      const container = document.getElementById('explore-grid');
+      container.innerHTML = '';
+
+      const filtered = DINOSAUR_DECK.filter(d => {
+        const matchesGroup = currentFilter === 'ALL' || d.group === currentFilter;
+        const matchesSearch = searchQuery === '' || 
+          d.name.toLowerCase().includes(searchQuery) || 
+          d.scientificName.toLowerCase().includes(searchQuery) ||
+          d.nameMeaning.toLowerCase().includes(searchQuery);
+        return matchesGroup && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-400 bg-white rounded-3xl border border-slate-200">
+            <span class="text-4xl block mb-2">🔍</span>
+            <p class="font-bold text-slate-700">Nenhuma espécie encontrada com esses termos.</p>
+            <p class="text-xs">Tente buscar por "T-Rex", "Spinosaurus", "Mosasauro" ou limpe a busca.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(dino => {
+        const cardEl = document.createElement('div');
+        cardEl.className = `${dino.colorClass} border-2 rounded-3xl p-4 flex flex-col justify-between shadow-xs hover:shadow-md gentle-transition`;
+        
+        cardEl.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-extrabold text-xs px-2 py-0.5 rounded-lg bg-white/90 border border-current">${dino.id}</span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-lg ${dino.badgeBg}">${dino.groupName}</span>
+            </div>
+
+            <!-- Imagem Paleoartística Realista e Nomes -->
+            <div class="bg-white/80 rounded-2xl p-2 border border-current/15 mb-2.5 overflow-hidden">
+              <div class="paleo-art-box cursor-pointer group" onclick="openImageZoom('${dino.id}')" title="Clique para ampliar os detalhes anatômicos da espécie">
+                ${getSpeciesVisualHtml(dino, false)}
+                <div class="absolute bottom-1.5 right-1.5 bg-white/90 px-1.5 py-0.5 rounded text-[9px] font-bold text-slate-600 border border-slate-200 opacity-80 group-hover:opacity-100 transition-opacity">
+                  🔍 Ver detalhes
+                </div>
+              </div>
+              <div class="mt-2 text-center">
+                <h4 class="font-black text-slate-900 text-sm leading-tight">${dino.name}</h4>
+                <p class="text-[11px] italic text-slate-600 font-medium">${dino.scientificName}</p>
+                <p class="text-[10px] text-slate-400 leading-tight">"${dino.nameMeaning}"</p>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1 text-[11px] font-medium text-slate-700 bg-white/60 p-2.5 rounded-xl border border-slate-200/50 mb-3">
+              <div class="flex justify-between">
+                <span>🦒 Altura/Env.:</span>
+                <strong>${dino.height} m</strong>
+              </div>
+              <div class="flex justify-between">
+                <span>📏 Comprimento:</span>
+                <strong>${dino.length} m</strong>
+              </div>
+              <div class="flex justify-between">
+                <span>⚖️ Peso:</span>
+                <strong>${dino.weight >= 1000 ? (dino.weight / 1000).toLocaleString('pt-BR') + ' ton' : dino.weight + ' kg'}</strong>
+              </div>
+              <div class="flex justify-between">
+                <span>⚡ Velocidade:</span>
+                <strong>${dino.speed} km/h</strong>
+              </div>
+              <div class="flex justify-between">
+                <span>⏳ Antiguidade:</span>
+                <strong>${dino.period} Ma</strong>
+              </div>
+            </div>
+
+            <p class="text-[11px] text-slate-600 leading-snug mb-3">
+              ${dino.curiosity}
+            </p>
+          </div>
+
+          <button onclick="speakDinoExploration('${dino.id}')" class="w-full py-2 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 flex items-center justify-center gap-1.5 gentle-transition shadow-2xs">
+            <span>🔊 Ouvir Ficha Científica</span>
+          </button>
+        `;
+        container.appendChild(cardEl);
+      });
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      renderExploreGrid();
+    }
+
+    function filterGroup(grp) {
+      playClickSound();
+      currentFilter = grp;
+
+      document.querySelectorAll('.filter-pill').forEach(btn => {
+        btn.classList.remove('bg-sage-500', 'text-white', 'border-sage-500');
+        btn.classList.add('bg-slate-50', 'text-slate-600', 'border-slate-200');
+      });
+
+      event.currentTarget.classList.add('bg-sage-500', 'text-white', 'border-sage-500');
+      event.currentTarget.classList.remove('bg-slate-50', 'text-slate-600', 'border-slate-200');
+
+      renderExploreGrid();
+    }
+
+    function speakDinoExploration(id) {
+      playClickSound();
+      const dino = DINOSAUR_DECK.find(d => d.id === id);
+      if (!dino) return;
+      speakText(`${dino.name}, cientificamente ${dino.scientificName}, que traduz-se como ${dino.nameMeaning}. Do grupo ${dino.groupName}. Comprimento: ${dino.length} metros. Peso: ${dino.weight} quilos. Velocidade: ${dino.speed} quilômetros por hora. Detalhe anatômico de memória: ${dino.keyFeature}. Curiosidade: ${dino.curiosity}`);
+    }
+
+    /* --- MODAL DE AMPLIAÇÃO VISUAL PARA FIXAÇÃO DE MEMÓRIA --- */
+    function openImageZoom(id) {
+      playClickSound();
+      const dino = DINOSAUR_DECK.find(d => d.id === id);
+      if (!dino) return;
+
+      document.getElementById('zoom-title').textContent = dino.name;
+      document.getElementById('zoom-scientific').textContent = `${dino.scientificName} ("${dino.nameMeaning}")`;
+      document.getElementById('zoom-art-container').innerHTML = getSpeciesVisualHtml(dino, true);
+      document.getElementById('zoom-feature-desc').textContent = dino.keyFeature;
+      document.getElementById('zoom-source-desc').textContent = dino.imageSource ? `Fonte da imagem de pesquisa: ${dino.imageSource}` : "";
+      
+      document.getElementById('image-zoom-modal').classList.remove('hidden');
+
+      if (ttsEnabled) {
+        speakText(`${dino.name}. ${dino.keyFeature}`);
+      }
+    }
+
+    function closeImageZoom() {
+      playClickSound();
+      document.getElementById('image-zoom-modal').classList.add('hidden');
+    }
+
+    /* --- GESTÃO DE ABAS (PARTIDA VS EXPLORAR) --- */
+    const tabPlay = document.getElementById('tab-play');
+    const tabExplore = document.getElementById('tab-explore');
+    const playView = document.getElementById('play-view');
+    const exploreView = document.getElementById('explore-view');
+
+    tabPlay.addEventListener('click', () => {
+      playClickSound();
+      tabPlay.className = "flex-1 py-2.5 px-4 rounded-xl font-bold text-sm gentle-transition bg-white text-sage-900 shadow-sm flex items-center justify-center gap-2";
+      tabExplore.className = "flex-1 py-2.5 px-4 rounded-xl font-bold text-sm gentle-transition text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2";
+      playView.classList.remove('hidden');
+      exploreView.classList.add('hidden');
+    });
+
+    tabExplore.addEventListener('click', () => {
+      playClickSound();
+      tabExplore.className = "flex-1 py-2.5 px-4 rounded-xl font-bold text-sm gentle-transition bg-white text-sage-900 shadow-sm flex items-center justify-center gap-2";
+      tabPlay.className = "flex-1 py-2.5 px-4 rounded-xl font-bold text-sm gentle-transition text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2";
+      exploreView.classList.remove('hidden');
+      playView.classList.add('hidden');
+      renderExploreGrid();
+    });
+
+    /* --- MODAL E CONFIGURAÇÕES DE ACESSIBILIDADE --- */
+    const configBtn = document.getElementById('config-btn');
+    const configModal = document.getElementById('config-modal');
+
+    configBtn.addEventListener('click', () => {
+      playClickSound();
+      configModal.classList.remove('hidden');
+    });
+
+    function closeConfigModal() {
+      playClickSound();
+      configModal.classList.add('hidden');
+      if (!isRoundResolved && currentPlayerCard) {
+        renderCard('player', currentPlayerCard, false);
+      }
+    }
+
+    function setComplexity(level) {
+      playClickSound();
+      currentComplexity = level;
+      const simpleBtn = document.getElementById('mode-simple-btn');
+      const fullBtn = document.getElementById('mode-full-btn');
+
+      if (level === 'simple') {
+        simpleBtn.className = "p-3 rounded-xl border-2 border-sage-500 bg-sage-50 text-sage-900 font-bold text-xs gentle-transition text-left";
+        fullBtn.className = "p-3 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-xs gentle-transition text-left";
+      } else {
+        fullBtn.className = "p-3 rounded-xl border-2 border-sage-500 bg-sage-50 text-sage-900 font-bold text-xs gentle-transition text-left";
+        simpleBtn.className = "p-3 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-xs gentle-transition text-left";
+      }
+    }
+
+    function setTextScale(scale) {
+      playClickSound();
+      const normBtn = document.getElementById('font-normal-btn');
+      const largeBtn = document.getElementById('font-large-btn');
+
+      if (scale === 'large') {
+        document.documentElement.style.fontSize = '18px';
+        largeBtn.className = "flex-1 py-2 rounded-xl border-2 border-sage-500 bg-sage-50 text-sage-800 font-bold text-xs";
+        normBtn.className = "flex-1 py-2 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-xs";
+      } else {
+        document.documentElement.style.fontSize = '16px';
+        normBtn.className = "flex-1 py-2 rounded-xl border-2 border-sage-500 bg-sage-50 text-sage-800 font-bold text-xs";
+        largeBtn.className = "flex-1 py-2 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-xs";
+      }
+    }
+
+    document.getElementById('tts-rate-slider').addEventListener('input', (e) => {
+      ttsRate = parseFloat(e.target.value);
+    });
+
+    const ttsToggleBtn = document.getElementById('tts-toggle-btn');
+    const ttsLabel = document.getElementById('tts-label');
+    ttsToggleBtn.addEventListener('click', () => {
+      ttsEnabled = !ttsEnabled;
+      playClickSound();
+      if (ttsEnabled) {
+        ttsLabel.textContent = "Voz Ativa";
+        ttsToggleBtn.classList.remove('opacity-60');
+        speakText("Narração ativada.");
+      } else {
+        ttsLabel.textContent = "Voz Pausada";
+        ttsToggleBtn.classList.add('opacity-60');
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      }
+    });
+
+    const soundBtn = document.getElementById('sound-btn');
+    const iconOn = document.getElementById('sound-icon-on');
+    const iconOff = document.getElementById('sound-icon-off');
+    soundBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        iconOn.classList.remove('hidden');
+        iconOff.classList.add('hidden');
+        playClickSound();
+      } else {
+        iconOn.classList.add('hidden');
+        iconOff.classList.remove('hidden');
+      }
+    });
+
+    window.onload = function() {
+      renderExploreGrid();
+    };
+  </script>
+</body>
+</html>

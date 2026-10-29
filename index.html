@@ -126,6 +126,42 @@
       white-space: nowrap;
       border: 0;
     }
+
+    /* ============================================================
+       VIRADA 3D DA CARTA (IMITA O BARALHO ANALÓGICO DE SUPER TRUNFO)
+       ============================================================ */
+    .flip-scene { perspective: 1700px; perspective-origin: 50% 42%; }
+    .flip-inner {
+      display: grid;
+      transform-style: preserve-3d;
+      transition: transform 0.9s cubic-bezier(.2,.86,.24,1);
+      will-change: transform;
+    }
+    .flip-inner.is-flipped { transform: rotateY(180deg); }
+    .flip-face {
+      grid-area: 1 / 1;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .flip-face-frente { transform: rotateY(180deg); }
+    .card-verso {
+      background: linear-gradient(145deg, #5b7f5d 0%, #34503a 45%, #24351f 100%);
+      border: 2px solid #1f2f1c;
+      box-shadow: 0 12px 26px rgba(36,53,31,0.30), inset 0 0 0 6px rgba(255,255,255,0.07);
+    }
+    .card-verso-pattern {
+      background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.45) 1.3px, transparent 1.5px);
+      background-size: 20px 20px;
+    }
+    @keyframes dealIn {
+      from { opacity: 0; transform: translateY(16px) scale(.985) rotate(-0.6deg); }
+      to   { opacity: 1; transform: none; }
+    }
+    .deal-in { animation: dealIn .5s ease-out both; }
+    @media (prefers-reduced-motion: reduce) {
+      .flip-inner { transition: none !important; }
+      .deal-in { animation: none !important; }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased selection:bg-sage-200">
@@ -485,9 +521,14 @@
 
   <!-- RODAPÉ FIXO E MINIMALISTA -->
   <footer class="bg-white border-t border-sage-100 py-3 px-4 text-center text-xs text-slate-500">
-    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1">
-      <p>🦕 <strong>PaleoTrunfo</strong> — 48 Espécies Pré-Históricas com Nomes Científicos e Reconstituições Realistas.</p>
-      <p class="text-slate-400">Sem anúncios • Sem limites de tempo • Respeito sensorial</p>
+    <div class="max-w-4xl mx-auto flex flex-col items-center gap-1">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-1 w-full">
+        <p>🦕 <strong>PaleoTrunfo</strong> — 48 Espécies Pré-Históricas com Nomes Científicos e Reconstituições Realistas.</p>
+        <p class="text-slate-400">Sem anúncios • Sem limites de tempo • Respeito sensorial</p>
+      </div>
+      <p class="text-[10px] leading-relaxed text-slate-400">
+        Paleoartes de TotalDino, Dmitry Bogdanov, Julio Lacerda, Mark P. Witton, Connor Ashbridge, Emily Willoughby, Fred Wierum, Maurício Antón, Nobu Tamura, Leví Martínez-Reza, Jeff Martz/NPS, entre outros — Wikimedia Commons (CC BY, CC BY-SA e CC0).
+      </p>
     </div>
   </footer>
 
@@ -508,7 +549,6 @@
               alt="${dino.name} - ${dino.scientificName}" 
               class="${hClass} card-real-img"
               loading="lazy"
-              crossorigin="anonymous"
               onerror="this.onerror=null; this.style.display='none'; document.getElementById('fallback-${dino.id}-${isZoom ? 'z' : 'c'}').style.display='block';"
             />
             <div id="fallback-${dino.id}-${isZoom ? 'z' : 'c'}" style="display:none;" class="w-full h-full">
@@ -570,8 +610,9 @@
         height: 4.0, length: 12.3, weight: 8400, speed: 27, period: 66,
         keyFeature: "Crânio massivo de 1,5m reforçado com dentes serrilhados do tamanho de bananas, projetados para estilhaçar ossos.",
         curiosity: "Possuía uma das mordidas mais esmagadoras de todos os animais terrestres da história!",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus%20TD.png",
-        imageSource: "Reconstrução paleoartística anatômica em estúdio (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/1a_tyrannosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#fce7f3", primary: "#831843", secondary: "#9d174d", belly: "#be185d", accent: "#fb7185" },
         customArtSvg: `
           <path d="M 50 145 Q 85 130 130 120" stroke="#831843" stroke-width="14" stroke-linecap="round" fill="none"/>
@@ -601,8 +642,9 @@
         height: 5.4, length: 15.0, weight: 7500, speed: 20, period: 95,
         keyFeature: "Enorme vela dorsal de quase 2m suportada por espinhas neurais e cauda ondulante adaptada à natação.",
         curiosity: "Tinha cauda em formato de remo e uma enorme vela dorsal, excelente nadador em rios cretáceos.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Spinosaurus%20TD.png",
-        imageSource: "Reconstrução paleoartística semi-aquática isolada (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/1b_spinosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#ffe4e6", primary: "#9f1239", secondary: "#be123c", belly: "#e11d48", accent: "#f43f5e" },
         customArtSvg: `
           <path d="M 110 115 Q 155 35 210 105 Z" fill="url(#accentGrad-1B)" stroke="#881337" stroke-width="2"/>
@@ -629,8 +671,9 @@
         height: 4.2, length: 13.0, weight: 8200, speed: 32, period: 97,
         keyFeature: "Crânio de perfil baixo com dentes afiados como lâminas de serra, ideais para cortar nacos de carne de titanossauros.",
         curiosity: "Habitou a América do Sul e caçava até gigantescos saurópodes em bandos coordenados.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Giganotosaurus%20carolinii%20restoration.png",
-        imageSource: "Modelo anatômico isolado de Giganotosaurus (Wikimedia Commons)",
+        imageUrl: "img/1c_giganotosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#fdf2f8", primary: "#701a75", secondary: "#86198f", belly: "#a21caf", accent: "#d946ef" },
         customArtSvg: `
           <path d="M 45 140 Q 85 125 125 120" stroke="#701a75" stroke-width="13" stroke-linecap="round" fill="none"/>
@@ -655,8 +698,9 @@
         height: 3.5, length: 9.7, weight: 2300, speed: 34, period: 150,
         keyFeature: "Par de cristas lacrimais cor-de-fogo logo acima dos olhos e braços ágeis com três garras afiadas.",
         curiosity: "Predador supremo do período Jurássico, possuía cristas ósseas decorativas acima dos olhos.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Allosaurus%20TD.png",
-        imageSource: "Reconstrução paleoartística isolada em fundo branco (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/1d_allosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#fff1f2", primary: "#991b1b", secondary: "#b91c1c", belly: "#dc2626", accent: "#f87171" },
         customArtSvg: `
           <path d="M 40 148 Q 80 132 125 124" stroke="#991b1b" stroke-width="10" stroke-linecap="round" fill="none"/>
@@ -684,8 +728,9 @@
         height: 12.5, length: 22.0, weight: 42000, speed: 12, period: 152,
         keyFeature: "Postura ereta quase vertical estilo girafa, com patas dianteiras mais altas que as traseiras.",
         curiosity: "Suas patas dianteiras eram maiores que as traseiras, permitindo alcançar as copas das árvores.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Brachiosaurus%20altithorax%20restoration.png",
-        imageSource: "Reconstrução anatômica isolada de Brachiosaurus (Wikimedia Commons)",
+        imageUrl: "img/2a_brachiosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#ecfdf5", primary: "#065f46", secondary: "#047857", belly: "#059669", accent: "#34d399" },
         customArtSvg: `
           <path d="M 40 160 Q 75 150 110 145" stroke="#065f46" stroke-width="12" stroke-linecap="round" fill="none"/>
@@ -710,8 +755,9 @@
         height: 16.0, length: 36.0, weight: 78000, speed: 8, period: 94,
         keyFeature: "Tronco em formato de barril maciço e pernas colunares como pilares de sustentação de pontes.",
         curiosity: "Um dos maiores vertebrados terrestres conhecidos pela ciência, suas vértebras mediam mais de 1,5 metro!",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Argentinosaurus%20huinculensis%20restoration.png",
-        imageSource: "Reconstrução paleobiológica em fundo neutro (Wikimedia Commons)",
+        imageUrl: "img/2b_argentinosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#f0fdf4", primary: "#14532d", secondary: "#166534", belly: "#15803d", accent: "#4ade80" },
         customArtSvg: `
           <path d="M 30 155 Q 70 145 110 138" stroke="#14532d" stroke-width="16" stroke-linecap="round" fill="none"/>
@@ -736,8 +782,9 @@
         height: 5.0, length: 27.0, weight: 15000, speed: 15, period: 154,
         keyFeature: "Cauda hiperalongada afinando em chicote e dentes frontais em forma de lápis para ceifar folhas.",
         curiosity: "Sua cauda em forma de chicote quebrava a barreira do som ao ser agitada como defesa.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Diplodocus%20TD.png",
-        imageSource: "Modelo anatômico isolado em fundo limpo (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/2c_diplodocus-td.jpg",
+        artCredit: "TotalDino (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#f0fdf4", primary: "#164e63", secondary: "#0e7490", belly: "#0891b2", accent: "#22d3ee" },
         customArtSvg: `
           <path d="M 20 148 Q 50 140 110 135" stroke="#164e63" stroke-width="8" stroke-linecap="round" fill="none"/>
@@ -761,8 +808,9 @@
         height: 5.5, length: 23.0, weight: 24000, speed: 14, period: 151,
         keyFeature: "Pescoço extraordinariamente largo e robusto, ancorado por costelas cervicais espessas.",
         curiosity: "Famoso na história popular pelo sinônimo Brontossauro, tinha ossos cervicais muito robustos.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Apatosaurus%20louisae%20by%20durbed.jpg",
-        imageSource: "Reconstrução paleoartística anatômica em estúdio (Wikimedia Commons / Durbed)",
+        imageUrl: "img/2d_apatosaurus-td.jpg",
+        artCredit: "TotalDino (CC0)",
+        imageSource: "Paleoarte de TotalDino, licença CC0 — Wikimedia Commons",
         palette: { bg: "#ecfdf5", primary: "#134e4a", secondary: "#0f766e", belly: "#14b8a6", accent: "#5eead4" },
         customArtSvg: `
           <path d="M 30 152 Q 70 142 110 138" stroke="#134e4a" stroke-width="12" stroke-linecap="round" fill="none"/>
@@ -788,8 +836,9 @@
         height: 3.0, length: 9.0, weight: 9500, speed: 25, period: 68,
         keyFeature: "Escudo parietal sólido e dois grandes chifres sobreoculares de até 1 metro apontando para a frente.",
         curiosity: "Seu golaço ósseo maciço protegia seu pescoço em embates contra o T-Rex.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Triceratops%20TD.png",
-        imageSource: "Reconstrução 3D de estúdio com fundo transparente/branco (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/3a_triceratops-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#fffbeb", primary: "#78350f", secondary: "#92400e", belly: "#b45309", accent: "#f59e0b" },
         customArtSvg: `
           <path d="M 50 145 Q 85 135 120 130" stroke="#78350f" stroke-width="11" stroke-linecap="round" fill="none"/>
@@ -819,8 +868,9 @@
         height: 2.2, length: 5.5, weight: 3000, speed: 28, period: 75,
         keyFeature: "Coroa de espinhos longos saindo da borda do escudo e chifre nasal retilíneo imponente.",
         curiosity: "Seu escudo ósseo contava com até seis longos espigões voltados para trás.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Styracosaurus%20BW.jpg",
-        imageSource: "Reconstrução anatômica isolada em fundo neutro (Wikimedia Commons / Nobu Tamura)",
+        imageUrl: "img/3b_styracosaurus-td.jpg",
+        artCredit: "TotalDino (CC0)",
+        imageSource: "Paleoarte de TotalDino, licença CC0 — Wikimedia Commons",
         palette: { bg: "#fef3c7", primary: "#854d0e", secondary: "#a16207", belly: "#ca8a04", accent: "#eab308" },
         customArtSvg: `
           <path d="M 50 145 Q 85 135 120 130" stroke="#854d0e" stroke-width="10" stroke-linecap="round" fill="none"/>
@@ -849,8 +899,9 @@
         height: 2.5, length: 6.0, weight: 3500, speed: 26, period: 70,
         keyFeature: "Domo nasal ósseo rugoso (boss) achatado, usado em choques de cabeça frontais.",
         curiosity: "Ao invés de um chifre agudo, portava uma calosidade óssea maciça de impacto no focinho.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Pachyrhinosaurus%20TD.png",
-        imageSource: "Reconstrução paleoartística isolada em fundo transparente (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/3c_pachyrhinosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#fffbeb", primary: "#9a3412", secondary: "#c2410c", belly: "#ea580c", accent: "#fb923c" },
         customArtSvg: `
           <ellipse cx="145" cy="130" rx="42" ry="26" fill="url(#bodyGrad-3C)"/>
@@ -875,8 +926,9 @@
         height: 0.8, length: 1.8, weight: 190, speed: 30, period: 75,
         keyFeature: "Porte compacto com bico curvo cortador de plantas duras e escudo sem chifres agressivos.",
         curiosity: "Tinha porte de ovelha e bico de papagaio. Um fóssil famoso o preservou lutando contra um Velociraptor!",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Protoceratops%20andrewsi%20restoration.png",
-        imageSource: "Reconstrução anatômica isolada de Protoceratops (Wikimedia Commons)",
+        imageUrl: "img/3d_protoceratops-td.jpg",
+        artCredit: "TotalDino (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#fef3c7", primary: "#b45309", secondary: "#d97706", belly: "#f59e0b", accent: "#fde68a" },
         customArtSvg: `
           <ellipse cx="145" cy="135" rx="36" ry="22" fill="url(#bodyGrad-3D)"/>
@@ -903,8 +955,9 @@
         height: 1.7, length: 8.0, weight: 6500, speed: 10, period: 67,
         keyFeature: "Blindagem de placas ósseas fundidas nas costas e uma maça óssea sólida na ponta da cauda.",
         curiosity: "Possuía placas dérmicas tão duras que até suas pálpebras tinham ossos protetores.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Ankylosaurus%20TD.png",
-        imageSource: "Reconstrução anatômica 3D isolada com fundo transparente (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/4a_ankylosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#f5f5f4", primary: "#44403c", secondary: "#57534e", belly: "#78716c", accent: "#d6d3d1" },
         customArtSvg: `
           <path d="M 45 145 Q 85 142 120 138" stroke="#44403c" stroke-width="9" stroke-linecap="round" fill="none"/>
@@ -933,8 +986,9 @@
         height: 4.0, length: 9.0, weight: 4800, speed: 15, period: 152,
         keyFeature: "Fileira dupla de placas pentagonais erguidas nas costas e 4 espigões na cauda (thagomizer).",
         curiosity: "As placas ósseas nas suas costas ajudavam na termorregulação e sua cauda tinha quatro espigões.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Stegosaurus%20TD.png",
-        imageSource: "Reconstrução anatômica 3D isolada com fundo transparente (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/4b_stegosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#f5f5f4", primary: "#3f3f46", secondary: "#52525b", belly: "#71717a", accent: "#fb923c" },
         customArtSvg: `
           <polygon points="105,120 115,85 125,120" fill="url(#accentGrad-4B)"/>
@@ -964,8 +1018,9 @@
         height: 1.8, length: 6.0, weight: 2500, speed: 12, period: 110,
         keyFeature: "Couraça densa contínua com espinhos projetando-se lateralmente nos ombros.",
         curiosity: "Diferente do Anquilossauro, não tinha maça na cauda, confiando em espinhos laterais e placas densas.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Nodosaurus%20textilis%20restoration.jpg",
-        imageSource: "Reconstrução paleoartística isolada em estúdio (Wikimedia Commons)",
+        imageUrl: "img/4c_nodosaurus-500-twa.jpg",
+        artCredit: "Conty (CC BY 3.0)",
+        imageSource: "Paleoarte de Conty, licença CC BY 3.0 — Wikimedia Commons",
         palette: { bg: "#f5f5f4", primary: "#292524", secondary: "#44403c", belly: "#78716c", accent: "#a8a29e" },
         customArtSvg: `
           <ellipse cx="150" cy="135" rx="46" ry="24" fill="url(#bodyGrad-4C)"/>
@@ -989,8 +1044,9 @@
         height: 2.0, length: 4.5, weight: 1300, speed: 18, period: 152,
         keyFeature: "Pequenas placas na frente e espigões agudos duplos cobrindo todo o dorso traseiro e cauda.",
         curiosity: "Substituía as placas dorsais por longos e afiados espinhos que chegavam aos ombros e quadris.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Kentrosaurus%20aethiopicus%20life%20restoration.png",
-        imageSource: "Reconstrução morfológica fiel isolada (Wikimedia Commons)",
+        imageUrl: "img/4d_kentrosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#fafaf9", primary: "#1c1917", secondary: "#292524", belly: "#57534e", accent: "#fb7185" },
         customArtSvg: `
           <polygon points="120,120 128,100 136,120" fill="#a8a29e"/>
@@ -1019,8 +1075,9 @@
         height: 3.8, length: 10.0, weight: 3600, speed: 35, period: 76,
         keyFeature: "Crista tubular curvada de até 1,8m conectada às vias aéreas para emitir chamados ressonantes.",
         curiosity: "Sua crista oca chegava a 1,8 metro de comprimento e produzia notas sonoras graves e vibrantes.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Parasaurolophus%20TD.png",
-        imageSource: "Reconstrução anatômica 3D isolada em fundo transparente (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/5a_parasaurolophus-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#f0f9ff", primary: "#0369a1", secondary: "#0284c7", belly: "#38bdf8", accent: "#f97316" },
         customArtSvg: `
           <path d="M 40 150 Q 85 135 125 128" stroke="#0369a1" stroke-width="11" stroke-linecap="round" fill="none"/>
@@ -1046,8 +1103,9 @@
         height: 3.2, length: 10.0, weight: 4200, speed: 30, period: 125,
         keyFeature: "Polegar cônico agudo transformado em espora defensiva contra grandes predadores.",
         curiosity: "Um dos primeiros dinossauros descritos pela ciência; seu polegar cônico agudo servia para defesa.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Iguanodon%20bernissartensis%20restoration.jpg",
-        imageSource: "Reconstrução paleoartística isolada em estúdio (Wikimedia Commons)",
+        imageUrl: "img/5b_iguanodon-td.jpg",
+        artCredit: "TotalDino (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#f0f9ff", primary: "#075985", secondary: "#0369a1", belly: "#0ea5e9", accent: "#bae6fd" },
         customArtSvg: `
           <ellipse cx="150" cy="125" rx="42" ry="26" fill="url(#bodyGrad-5B)"/>
@@ -1071,8 +1129,9 @@
         height: 1.8, length: 4.5, weight: 450, speed: 38, period: 68,
         keyFeature: "Domo ósseo espesso no topo do crânio orlado por pequenos nódulos pontiagudos.",
         curiosity: "Seu crânio ostentava um domo de osso sólido de até 25 cm para empurrões e disputas territoriais.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Pachycephalosaurus%20TD.png",
-        imageSource: "Reconstrução 3D isolada com fundo transparente (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/5c_pachycephalosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#f0f9ff", primary: "#0c4a6e", secondary: "#075985", belly: "#0284c7", accent: "#e0f2fe" },
         customArtSvg: `
           <ellipse cx="150" cy="125" rx="38" ry="22" fill="url(#bodyGrad-5C)"/>
@@ -1096,8 +1155,9 @@
         height: 3.0, length: 9.0, weight: 3000, speed: 32, period: 77,
         keyFeature: "Focinho em bico plano e pequena crista sólida entre os olhos para reconhecimento de ninhadas.",
         curiosity: "Forneceu a primeira prova fóssil irrefutável de que dinossauros cuidavam dos ninhos e alimentavam filhotes.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Maiasaura%20peeblesorum%20restoration.png",
-        imageSource: "Reconstrução anatômica isolada em fundo neutro (Wikimedia Commons)",
+        imageUrl: "img/5d_maiasaura-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#f0f9ff", primary: "#0284c7", secondary: "#38bdf8", belly: "#7dd3fc", accent: "#bae6fd" },
         customArtSvg: `
           <ellipse cx="150" cy="125" rx="42" ry="25" fill="url(#bodyGrad-5D)"/>
@@ -1122,8 +1182,9 @@
         height: 5.2, length: 11.0, weight: 220, speed: 108, period: 68,
         keyFeature: "Envergadura alar descomunal de 11 metros e bico pontiagudo do tamanho de um homem adulto.",
         curiosity: "Maior animal que voou na história da Terra; em terra firme, tinha a altura de uma girafa adulta!",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Quetzalcoatlus%20northropi%20restoration.png",
-        imageSource: "Reconstrução 3D do pterossauro gigante isolado (Wikimedia Commons)",
+        imageUrl: "img/6a_quetzalcoatlus-northropi.jpg",
+        artCredit: "Connor Ashbridge (CC BY 4.0)",
+        imageSource: "Paleoarte de Connor Ashbridge, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#faf5ff", primary: "#581c87", secondary: "#6b21a8", belly: "#7e22ce", accent: "#a855f7" },
         customArtSvg: `
           <path d="M 20 80 Q 110 50 160 100 Q 210 50 300 80 Q 220 130 160 120 Q 100 130 20 80 Z" fill="url(#accentGrad-6A)" stroke="#3b0764" stroke-width="2"/>
@@ -1146,8 +1207,9 @@
         height: 1.8, length: 6.5, weight: 45, speed: 85, period: 85,
         keyFeature: "Crista craniana retrovertida aerodinâmica e bico sem dentes especializado em pesca costeira.",
         curiosity: "Planava por centenas de quilômetros sobre oceanos rasos para apanhar peixes com o bico córneo.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Pteranodon%20longiceps%20restoration.jpg",
-        imageSource: "Reconstrução paleoartística isolada com fundo branco (Wikimedia Commons)",
+        imageUrl: "img/6b_pteranodon-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#faf5ff", primary: "#6b21a8", secondary: "#7e22ce", belly: "#9333ea", accent: "#c084fc" },
         customArtSvg: `
           <path d="M 30 90 Q 110 65 160 110 Q 210 65 290 90 Q 210 135 160 125 Q 110 135 30 90 Z" fill="url(#bodyGrad-6B)"/>
@@ -1170,8 +1232,9 @@
         height: 1.2, length: 4.0, weight: 15, speed: 70, period: 115,
         keyFeature: "Crista gigantesca em leque vertical que ocupava a maior parte do perfil de sua cabeça.",
         curiosity: "Fóssil emblemático da Bacia do Araripe no Brasil, com crista craniana gigantesca em formato de leque.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Tupandactylus%20imperator%20life%20restoration.png",
-        imageSource: "Reconstrução 3D isolada do pterossauro brasileiro (Wikimedia Commons)",
+        imageUrl: "img/6c_tapimpdb.jpg",
+        artCredit: "Dmitry Bogdanov (CC BY-SA 3.0)",
+        imageSource: "Paleoarte de Dmitry Bogdanov (CC BY-SA 3.0) — Wikimedia Commons",
         palette: { bg: "#faf5ff", primary: "#7e22ce", secondary: "#9333ea", belly: "#a855f7", accent: "#f43f5e" },
         customArtSvg: `
           <path d="M 40 105 Q 110 80 160 120 Q 210 80 280 105 Q 210 145 160 135 Q 110 145 40 105 Z" fill="url(#bodyGrad-6C)"/>
@@ -1192,8 +1255,9 @@
         height: 0.6, length: 1.4, weight: 4, speed: 60, period: 195,
         keyFeature: "Crânio alto e curto parecido com o de um papagaio-do-mar, com cauda longa provida de leme.",
         curiosity: "Pterossauro primitivo jurássico dotado de dentes afiados para caçar insetos e pequenos lagartos.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Dimorphodon%20macronyx%20restoration.jpg",
-        imageSource: "Reconstrução isolada em fundo neutro (Wikimedia Commons)",
+        imageUrl: "img/6d_dimorphodon.jpg",
+        artCredit: "Mark P. Witton (CC BY 4.0)",
+        imageSource: "Paleoarte de Mark P. Witton, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#faf5ff", primary: "#4a044e", secondary: "#701a75", belly: "#86198f", accent: "#d946ef" },
         customArtSvg: `
           <path d="M 50 110 Q 110 95 160 125 Q 210 95 270 110 Q 210 145 160 138 Z" fill="url(#bodyGrad-6D)"/>
@@ -1217,8 +1281,9 @@
         height: 2.5, length: 17.0, weight: 14000, speed: 48, period: 70,
         keyFeature: "Cauda bilobada potente como a de tubarão e mandíbulas duplas com dentes pterigóides para segurar presas escorregadias.",
         curiosity: "Lagarto marinho gigante ancestral dos varanídeos modernos, dotado de fileira extra de dentes pterigóides.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Mosasaurus%20hoffmannii%20life%20restoration.jpg",
-        imageSource: "Modelo anatômico marinho isolado em fundo limpo (Wikimedia Commons)",
+        imageUrl: "img/7a_mosasaurus-hoffmanni-life.jpg",
+        artCredit: "Jonagold2000 (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de Jonagold2000, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#f0fdfa", primary: "#115e59", secondary: "#0f766e", belly: "#14b8a6", accent: "#5eead4" },
         customArtSvg: `
           <path d="M 10 160 Q 80 150 160 160 T 310 160" stroke="#ccfbf1" stroke-width="4" fill="none"/>
@@ -1243,8 +1308,9 @@
         height: 1.5, length: 4.5, weight: 800, speed: 35, period: 180,
         keyFeature: "Pescoço esguio em forma de cobra com até 40 vértebras e 4 nadadeiras em forma de asa.",
         curiosity: "Navegava batendo quatro nadadeiras como se voasse debaixo d'água, emboscando peixes com o pescoço sinuoso.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Plesiosaurus%20dolichodeirus%20life%20restoration.png",
-        imageSource: "Reconstrução 3D isolada com fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/7b_plesiosaurus-3db.jpg",
+        artCredit: "Dmitry Bogdanov (CC BY 3.0)",
+        imageSource: "Paleoarte de Dmitry Bogdanov, licença CC BY 3.0 — Wikimedia Commons",
         palette: { bg: "#f0fdfa", primary: "#134e4a", secondary: "#0d9488", belly: "#2dd4bf", accent: "#99f6e4" },
         customArtSvg: `
           <ellipse cx="140" cy="148" rx="20" ry="8" fill="#0d9488" transform="rotate(35 140 148)"/>
@@ -1268,8 +1334,9 @@
         height: 1.0, length: 3.2, weight: 420, speed: 55, period: 190,
         keyFeature: "Formato perfeitamente fusiforme de golfinho com olhos enormes protegidos por anel esclerótico.",
         curiosity: "Exemplo magistral de evolução convergente: réptil com formato hidrodinâmico idêntico ao de golfinhos e atuns.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Ichthyosaurus%20communis%20restoration.jpg",
-        imageSource: "Reconstrução paleoartística isolada em fundo neutro (Wikimedia Commons)",
+        imageUrl: "img/7c_ichthyosaurus.jpg",
+        artCredit: "PaleoEquii (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de PaleoEquii, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#f0fdfa", primary: "#0f766e", secondary: "#14b8a6", belly: "#5eead4", accent: "#a5f3fc" },
         customArtSvg: `
           <polygon points="140,110 155,80 165,110" fill="#0f766e"/>
@@ -1294,8 +1361,9 @@
         height: 1.8, length: 7.0, weight: 3600, speed: 40, period: 160,
         keyFeature: "Crânio colossal e compacto de 2m dotado de narinas esterioscópicas para caça olfativa submarina.",
         curiosity: "Superpredador pliosaurídeo jurássico; suas narinas conseguiam farejar fontes de odor no mar profundo.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Liopleurodon%20ferox%20restoration.png",
-        imageSource: "Reconstrução 3D do pliosauro isolada com fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/7d_liopleurodon-after-tarlo.jpg",
+        artCredit: "DiBgd (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de DiBgd, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#f0fdfa", primary: "#042f2e", secondary: "#115e59", belly: "#134e4a", accent: "#2dd4bf" },
         customArtSvg: `
           <ellipse cx="130" cy="130" rx="42" ry="22" fill="url(#bodyGrad-7D)"/>
@@ -1320,8 +1388,9 @@
         height: 0.5, length: 2.0, weight: 18, speed: 64, period: 73,
         keyFeature: "Plumagem completa estilo ave de rapina e garra em foice curva e retrátil no segundo dedo do pé.",
         curiosity: "Tinha plumagem completa pelo corpo e uma garra curva e retrátil usada para prender presas no chão.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Velociraptor%20TD.png",
-        imageSource: "Reconstrução anatômica 3D isolada com fundo transparente (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/8a_velociraptor-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#fff7ed", primary: "#9a3412", secondary: "#c2410c", belly: "#ea580c", accent: "#fdba74" },
         customArtSvg: `
           <line x1="45" y1="130" x2="115" y2="125" stroke="#9a3412" stroke-width="6"/>
@@ -1348,8 +1417,9 @@
         height: 1.0, length: 3.4, weight: 80, speed: 50, period: 110,
         keyFeature: "Garra de foice de 13 cm hipertrofiada e tendões ósseos na cauda atuando como contrapeso dinâmico.",
         curiosity: "Sua descoberta em 1969 comprovou que dinossauros eram animais ágeis, endotérmicos e parentes próximos das aves.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Deinonychus%20antirrhopus%20restoration.png",
-        imageSource: "Reconstrução anatômica isolada em fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/8b_deinonychus-td.jpg",
+        artCredit: "TotalDino (CC0)",
+        imageSource: "Paleoarte de TotalDino, licença CC0 — Wikimedia Commons",
         palette: { bg: "#fff7ed", primary: "#7c2d12", secondary: "#9a3412", belly: "#c2410c", accent: "#fb923c" },
         customArtSvg: `
           <line x1="45" y1="132" x2="115" y2="125" stroke="#7c2d12" stroke-width="7"/>
@@ -1373,8 +1443,9 @@
         height: 0.3, length: 0.8, weight: 1, speed: 45, period: 120,
         keyFeature: "Quatro asas com longas penas de voo tanto nos braços quanto nas pernas traseiras para planar entre árvores.",
         curiosity: "Dinossauro de quatro asas com penas de voo nos braços e pernas; fósseis revelam que tinha penas pretas iridescentes.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Microraptor%20gui%20restoration.jpg",
-        imageSource: "Reconstrução paleoartística isolada com fundo limpo (Wikimedia Commons)",
+        imageUrl: "img/8c_microraptor-restoration.jpg",
+        artCredit: "Fred Wierum (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de Fred Wierum, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#fff7ed", primary: "#18181b", secondary: "#27272a", belly: "#3f3f46", accent: "#38bdf8" },
         customArtSvg: `
           <ellipse cx="160" cy="110" rx="55" ry="14" fill="#18181b" transform="rotate(-15 160 110)"/>
@@ -1398,8 +1469,9 @@
         height: 1.8, length: 6.0, weight: 520, speed: 45, period: 128,
         keyFeature: "Porte gigante de urso pardo com garra de foice brutal de 24 cm e ossos muito mais espessos.",
         curiosity: "O colosso da família raptor: pesava meia tonelada e sua foice de ataque media mais de 24 centímetros!",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Utahraptor%20ostrommaysi%20restoration.png",
-        imageSource: "Reconstrução anatômica isolada em fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/8d_utahraptor-updated.jpg",
+        artCredit: "Emily Willoughby (CC BY-SA 3.0)",
+        imageSource: "Paleoarte de Emily Willoughby, licença CC BY-SA 3.0 — Wikimedia Commons",
         palette: { bg: "#fff7ed", primary: "#431407", secondary: "#7c2d12", belly: "#9a3412", accent: "#ea580c" },
         customArtSvg: `
           <line x1="40" y1="135" x2="115" y2="125" stroke="#431407" stroke-width="10"/>
@@ -1425,8 +1497,9 @@
         height: 5.0, length: 10.0, weight: 5000, speed: 22, period: 70,
         keyFeature: "Três garras em lâmina de foice de 1 metro nos membros anteriores, as maiores do reino animal.",
         curiosity: "Terópode herbívoro que ostentava as maiores garras do reino animal: foices ósseas de até 1 metro de comprimento!",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Therizinosaurus%20TD.png",
-        imageSource: "Reconstrução 3D anatômica isolada em fundo transparente (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/9a_therizinosaurus-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#fffbeb", primary: "#713f12", secondary: "#854d0e", belly: "#a16207", accent: "#fef08a" },
         customArtSvg: `
           <ellipse cx="140" cy="130" rx="44" ry="32" fill="url(#bodyGrad-9A)"/>
@@ -1453,8 +1526,9 @@
         height: 3.0, length: 7.8, weight: 1500, speed: 50, period: 71,
         keyFeature: "Par de chifres frontais triangulares sobre os olhos e musculatura caudal focada em arrancadas velocíssimas.",
         curiosity: "Velocista com chifres frontais robustos e braços diminutos; um dos predadores mais rápidos do Cretáceo.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Carnotaurus%20TD.png",
-        imageSource: "Reconstrução paleoartística isolada com fundo transparente (Wikimedia Commons / TotalDino)",
+        imageUrl: "img/9b_carnotaurus-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#fffbeb", primary: "#831843", secondary: "#9d174d", belly: "#be185d", accent: "#fb7185" },
         customArtSvg: `
           <path d="M 40 142 Q 85 128 125 122" stroke="#831843" stroke-width="12" stroke-linecap="round" fill="none"/>
@@ -1479,8 +1553,9 @@
         height: 4.4, length: 11.0, weight: 6400, speed: 24, period: 70,
         keyFeature: "Bico achatado de pato, vela dorsal corcunda e braços de 2,4m com garras recurvadas.",
         curiosity: "Bizarro ornitomimossauro gigante com bico largo de pato, vela nas costas e braços colossais com garras recurvadas.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Deinocheirus%20mirificus%20life%20restoration.png",
-        imageSource: "Reconstrução paleoartística isolada em fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/9c_deinocheirus-td.jpg",
+        artCredit: "TotalDino (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#fffbeb", primary: "#451a03", secondary: "#78350f", belly: "#92400e", accent: "#d97706" },
         customArtSvg: `
           <path d="M 130 115 Q 155 70 180 115 Z" fill="#d97706"/>
@@ -1503,8 +1578,9 @@
         height: 2.8, length: 8.5, weight: 1700, speed: 30, period: 125,
         keyFeature: "Focinho com roseta terminal entalhada e garra curva de 31 cm no primeiro dedo das mãos.",
         curiosity: "Espinossaurídeo com mandíbulas alongadas semelhantes às de crocodilos para pescar grandes peixes celacantos.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Baryonyx%20walkeri%20life%20restoration.png",
-        imageSource: "Reconstrução paleoartística isolada em fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/9d_baryonyx-td.jpg",
+        artCredit: "TotalDino (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#fffbeb", primary: "#713f12", secondary: "#a16207", belly: "#ca8a04", accent: "#fef08a" },
         customArtSvg: `
           <ellipse cx="150" cy="122" rx="42" ry="22" fill="url(#bodyGrad-9D)"/>
@@ -1530,8 +1606,9 @@
         height: 1.5, length: 3.5, weight: 250, speed: 20, period: 280,
         keyFeature: "Vela neural circular suportada por espinhas ósseas alongadas, para aquecimento térmico ao sol matinal.",
         curiosity: "Não era um dinossauro, mas sim um sinapsídeo pelicossauro, mais parente dos mamíferos do que dos répteis!",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Dimetrodon%20grandis%20restoration.png",
-        imageSource: "Reconstrução 3D isolada do pelicossauro (Wikimedia Commons)",
+        imageUrl: "img/10a_dimetrodon-td.jpg",
+        artCredit: "TotalDino (CC BY 4.0)",
+        imageSource: "Paleoarte de TotalDino, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#fefce8", primary: "#854d0e", secondary: "#a16207", belly: "#ca8a04", accent: "#eab308" },
         customArtSvg: `
           <path d="M 100 135 Q 150 25 200 135 Z" fill="url(#accentGrad-10A)" stroke="#713f12" stroke-width="2"/>
@@ -1558,8 +1635,9 @@
         height: 1.3, length: 4.0, weight: 300, speed: 28, period: 215,
         keyFeature: "Crânio maciço com placas osteodérmicas no dorso e postura ereta semi-bípede pré-dinossauro.",
         curiosity: "Arquossauro couraçado que dominava o topo da cadeia alimentar antes dos dinossauros se tornarem gigantes.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Postosuchus%20kirkpatricki%20restoration.png",
-        imageSource: "Reconstrução do predador triássico isolada (Wikimedia Commons)",
+        imageUrl: "img/10b_postosuchus3.jpg",
+        artCredit: "Leví Martínez-Reza (CC0)",
+        imageSource: "Paleoarte de Leví Martínez-Reza, licença CC0 — Wikimedia Commons",
         palette: { bg: "#fefce8", primary: "#78350f", secondary: "#92400e", belly: "#b45309", accent: "#f59e0b" },
         customArtSvg: `
           <ellipse cx="150" cy="130" rx="42" ry="22" fill="url(#bodyGrad-10B)"/>
@@ -1581,8 +1659,9 @@
         height: 1.1, length: 2.5, weight: 200, speed: 36, period: 255,
         keyFeature: "Caninos em sabre gigantescos saindo da mandíbula superior antes de qualquer felino existir.",
         curiosity: "Sinapsídeo predador do Permiano dotado dos primeiros dentes-de-sabre verdadeiros da história fóssil.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Gorgonops%20torvus%20restoration.png",
-        imageSource: "Reconstrução do gorgonopsídeo isolada em fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/10c_gorgonops-torvus.jpg",
+        artCredit: "Dmitry Bogdanov (CC0)",
+        imageSource: "Paleoarte de Dmitry Bogdanov, licença CC0 — Wikimedia Commons",
         palette: { bg: "#fefce8", primary: "#713f12", secondary: "#a16207", belly: "#ca8a04", accent: "#fde047" },
         customArtSvg: `
           <ellipse cx="145" cy="132" rx="40" ry="20" fill="url(#bodyGrad-10C)"/>
@@ -1605,8 +1684,9 @@
         height: 1.2, length: 4.5, weight: 280, speed: 18, period: 220,
         keyFeature: "Par de espigões escapulares curvados para trás com até 45 cm nas laterais do pescoço.",
         curiosity: "Aetossauro herbívoro com blindagem pesada e dois gigantescos esporões pontiagudos curvados nos ombros.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Desmatosuchus%20spurensis%20restoration.png",
-        imageSource: "Reconstrução 3D isolada do aetossauro (Wikimedia Commons)",
+        imageUrl: "img/10d_desmatosuchus-spurensis.jpg",
+        artCredit: "Jeff Martz / NPS (domínio público)",
+        imageSource: "Paleoarte de Jeff Martz / NPS (domínio público) — Wikimedia Commons",
         palette: { bg: "#fefce8", primary: "#451a03", secondary: "#78350f", belly: "#b45309", accent: "#fde047" },
         customArtSvg: `
           <ellipse cx="150" cy="135" rx="46" ry="22" fill="url(#bodyGrad-10D)"/>
@@ -1631,8 +1711,9 @@
         height: 4.5, length: 13.0, weight: 7000, speed: 25, period: 98,
         keyFeature: "Maior carnívoro fóssil do Brasil, com mandíbulas alongadas e dentes canelados típicos do Maranhão.",
         curiosity: "Maior carnívoro descoberto no Brasil, encontrado na Ilha do Cajual (Maranhão); primo próximo do Espinossauro.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Oxalaia%20quilombensis%20life%20restoration.png",
-        imageSource: "Reconstrução anatômica 3D isolada com fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/11a_life-reconstruction-of-oxalaia-quilomben.jpg",
+        artCredit: "Connor Ashbridge (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de Connor Ashbridge, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#f7fee7", primary: "#365314", secondary: "#4d7c0f", belly: "#65a30d", accent: "#a3e635" },
         customArtSvg: `
           <path d="M 120 120 Q 155 60 195 115 Z" fill="#65a30d"/>
@@ -1656,8 +1737,9 @@
         height: 2.6, length: 8.0, weight: 1400, speed: 32, period: 110,
         keyFeature: "Articulação mandibular única que permitia alargar a boca lateralmente para deglutir peixes inteiros no Ceará.",
         curiosity: "Fóssil do Ceará que abria a mandíbula para os lados para engolir peixes inteiros, como os pelicanos atuais.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Irritator%20challengeri%20life%20restoration.png",
-        imageSource: "Reconstrução paleoartística isolada em fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/11b_irritator-paleoart-by-sauroarchive.jpg",
+        artCredit: "Sauroarchive (CC BY 4.0)",
+        imageSource: "Paleoarte de Sauroarchive, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#f7fee7", primary: "#3f6212", secondary: "#4d7c0f", belly: "#65a30d", accent: "#bef264" },
         customArtSvg: `
           <ellipse cx="150" cy="122" rx="40" ry="22" fill="url(#bodyGrad-11B)"/>
@@ -1680,8 +1762,9 @@
         height: 0.5, length: 1.5, weight: 7, speed: 42, period: 233,
         keyFeature: "Dentes curvados e carnívoros no mais antigo ancestral da linhagem dos gigantescos pescoçudos no RS.",
         curiosity: "Descoberto no Rio Grande do Sul, é um dos mais antigos dinossauros do planeta; ancestral carnívoro dos gigantescos saurópodes!",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Buriolestes%20schultzi%20restoration.png",
-        imageSource: "Reconstrução 3D isolada de Buriolestes (CAPPA/UFSM - Wikimedia Commons)",
+        imageUrl: "img/11c_buriolestes-lmr.jpg",
+        artCredit: "Leví Martínez-Reza (CC BY 4.0)",
+        imageSource: "Paleoarte de Leví Martínez-Reza, licença CC BY 4.0 — Wikimedia Commons",
         palette: { bg: "#f7fee7", primary: "#14532d", secondary: "#166534", belly: "#15803d", accent: "#86efac" },
         customArtSvg: `
           <ellipse cx="145" cy="125" rx="30" ry="16" fill="url(#bodyGrad-11C)"/>
@@ -1703,8 +1786,9 @@
         height: 8.0, length: 25.0, weight: 35000, speed: 12, period: 84,
         keyFeature: "Vértebras com anéis de osso denso intercalados com tecido esponjoso, o maior dinossauro do Brasil.",
         curiosity: "Maior dinossauro já desenterrado em solo brasileiro (Presidente Prudente - SP), verdadeiro titã dos pampas e cerrados ancestrais.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Austroposeidon%20magnificus%20restoration.png",
-        imageSource: "Museu Nacional / UFRJ - Reconstrução do gigante paulista isolada",
+        imageUrl: "img/11d_austroposeidon-lm.jpg",
+        artCredit: "Levi Martinez-Reza (CC BY-SA 3.0)",
+        imageSource: "Paleoarte de Levi Martinez-Reza, licença CC BY-SA 3.0 — Wikimedia Commons",
         palette: { bg: "#f7fee7", primary: "#164e63", secondary: "#0e7490", belly: "#06b6d4", accent: "#67e8f9" },
         customArtSvg: `
           <ellipse cx="150" cy="130" rx="50" ry="32" fill="url(#bodyGrad-11D)"/>
@@ -1729,8 +1813,9 @@
         height: 1.3, length: 2.6, weight: 400, speed: 45, period: 0.01,
         keyFeature: "Caninos superiores curvados de 28 cm em forma de lâmina e patas dianteiras com musculatura de lutador.",
         curiosity: "Predador supremo da América do Sul com caninos curvados de quase 30 cm que abriam em um ângulo de até 120 graus!",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Smilodon%20populator%20life%20restoration.png",
-        imageSource: "Reconstrução paleoartística isolada com fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/12a_smilodon-stalking-palaeolama.jpg",
+        artCredit: "Julio Lacerda (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de Julio Lacerda, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#eef2ff", primary: "#312e81", secondary: "#3730a3", belly: "#4338ca", accent: "#fef08a" },
         customArtSvg: `
           <path d="M 65 140 Q 85 138 105 135" stroke="#312e81" stroke-width="7" stroke-linecap="round" fill="none"/>
@@ -1755,8 +1840,9 @@
         height: 3.5, length: 5.5, weight: 6000, speed: 30, period: 0.004,
         keyFeature: "Presas de marfim espiraladas de mais de 3m e pelagem espessa dupla para resistir à estepe fria.",
         curiosity: "Adaptado ao frio glacial com espessa camada de gordura e presas helicoidais para varrer a neve da vegetação.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Mammuthus%20primigenius%20life%20restoration.png",
-        imageSource: "Reconstrução 3D do mamute isolada com fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/12b_woolly-mammoth-mammuthus-primigenius-mau.jpg",
+        artCredit: "Mauricio Antón (CC BY 2.5)",
+        imageSource: "Paleoarte de Mauricio Antón, licença CC BY 2.5 — Wikimedia Commons",
         palette: { bg: "#eef2ff", primary: "#1e1b4b", secondary: "#312e81", belly: "#4338ca", accent: "#fef08a" },
         customArtSvg: `
           <ellipse cx="165" cy="105" rx="18" ry="14" fill="#312e81"/>
@@ -1780,8 +1866,9 @@
         height: 4.0, length: 6.0, weight: 4000, speed: 10, period: 0.01,
         keyFeature: "Pélvis colossal e garras curvas que permitiam ficar em pé sobre as duas patas traseiras.",
         curiosity: "Alcançava folhas no topo de árvores apoiando-se nas patas traseiras e possuía ossos reforçados para escavar tocas imensas.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Megatherium%20americanum%20life%20restoration.png",
-        imageSource: "Reconstrução 3D isolada da preguiça-gigante (Wikimedia Commons)",
+        imageUrl: "img/12c_megatherium-americanum-by-sphenaphinae.jpg",
+        artCredit: "Sphenaphinae (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de Sphenaphinae, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#eef2ff", primary: "#3730a3", secondary: "#4338ca", belly: "#4f46e5", accent: "#c7d2fe" },
         customArtSvg: `
           <ellipse cx="145" cy="128" rx="42" ry="36" fill="url(#bodyGrad-12C)"/>
@@ -1804,8 +1891,9 @@
         height: 2.5, length: 2.2, weight: 150, speed: 65, period: 1.8,
         keyFeature: "Bico em gancho cortante como o de uma águia gigante acoplado a pernas longas de avestruz veloz.",
         curiosity: "Ave predadora não voadora com bico maciço e cortante em forma de machado, veloz corredora de planícies.",
-        imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Titanis%20walleri%20life%20restoration.png",
-        imageSource: "Reconstrução paleoartística isolada em fundo transparente (Wikimedia Commons)",
+        imageUrl: "img/12d_reconstruction-drawing-of-titanis-waller.jpg",
+        artCredit: "Alexoatss (CC BY-SA 4.0)",
+        imageSource: "Paleoarte de Alexoatss, licença CC BY-SA 4.0 — Wikimedia Commons",
         palette: { bg: "#eef2ff", primary: "#312e81", secondary: "#4338ca", belly: "#6366f1", accent: "#f59e0b" },
         customArtSvg: `
           <ellipse cx="140" cy="120" rx="26" ry="18" fill="url(#bodyGrad-12D)"/>
@@ -1856,6 +1944,36 @@
           osc.start(now + idx * 0.08);
           osc.stop(now + idx * 0.08 + 0.6);
         });
+      } catch(e) {}
+    }
+
+    function playCardFlipSound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const dur = 0.30;
+        const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < data.length; i++) {
+          const t = i / data.length;
+          data[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 2.4) * 0.45;
+        }
+        const src = ctx.createBufferSource();
+        src.buffer = buffer;
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(900, ctx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(3400, ctx.currentTime + dur);
+        filter.Q.value = 0.8;
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.5, ctx.currentTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + dur);
+        src.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        src.start();
       } catch(e) {}
     }
 
@@ -1987,6 +2105,13 @@
       renderCard('player', currentPlayerCard, false);
       renderCard('cpu', currentCpuCard, true);
 
+      const playerContainer = document.getElementById('player-card-container');
+      if (playerContainer) {
+        playerContainer.classList.remove('deal-in');
+        void playerContainer.offsetWidth;
+        playerContainer.classList.add('deal-in');
+      }
+
       if (ttsEnabled) {
         speakText(`Rodada ${currentRoundIndex + 1}. Sua carta é o ${currentPlayerCard.name}, nome científico ${currentPlayerCard.scientificName}. Escolha um atributo.`);
       }
@@ -2009,25 +2134,23 @@
       }
     }
 
-    /* --- COMPONENTES VISUAIS DA CARTA COM IMAGEM REALISTA E NOMES --- */
-    function renderCard(target, dino, isCovered) {
-      const container = document.getElementById(`${target}-card-container`);
-      const isPlayer = target === 'player';
-
-      if (isCovered) {
-        container.innerHTML = `
-          <div class="w-full bg-slate-100 border-2 border-dashed border-slate-300 rounded-3xl p-6 flex flex-col items-center justify-center min-h-[460px] text-center shadow-inner">
-            <div class="w-16 h-16 rounded-2xl bg-white/80 border border-slate-200 flex items-center justify-center text-3xl mb-3 shadow-xs">
-      <div id="zoom-art-container" class="w-full h-64 sm:h-72 rounded-2xl bg-gradient-to-b from-white to-slate-100 border border-slate-200 flex items-center justify-center p-3 overflow-hidden relative shadow-inner">
-        <!-- Paleoarte ou Foto da Internet Renderizada Grande -->
-      </div>
-            <p class="font-bold text-slate-700 text-sm">Carta do Robô Amigo</p>
-            <p class="text-xs text-slate-400 mt-1 max-w-[220px]">A espécie e seus atributos serão revelados assim que você escolher a comparação!</p>
+    /* --- VERSO DA CARTA (MESMO DESIGN DE UM BARALHO ANALÓGICO) --- */
+    function cardBackHtml(tag) {
+      return `
+        <div class="w-full card-verso rounded-3xl flex flex-col items-center justify-center min-h-[480px] p-6 text-center relative overflow-hidden">
+          <div class="absolute inset-0 card-verso-pattern opacity-30"></div>
+          <div class="relative flex flex-col items-center gap-3">
+            <div class="w-20 h-20 rounded-full bg-white/15 border-2 border-white/40 flex items-center justify-center text-4xl">🦕</div>
+            <p class="text-white font-black tracking-[0.28em] text-sm">PALEO TRUNFO</p>
+            <p class="text-white/75 text-[10px] tracking-[0.18em] uppercase">A Jornada dos Gigantes</p>
+            <div class="mt-1 px-3 py-1 rounded-full bg-white/10 border border-white/30 text-white/85 text-[10px] font-bold uppercase tracking-wider">${tag}</div>
+            <p class="text-white/65 text-[11px] mt-3 max-w-[190px] leading-relaxed">Escolha um atributo na sua carta para virar esta carta</p>
           </div>
-        `;
-        return;
-      }
+        </div>`;
+    }
 
+    /* --- FRENTE DA CARTA (PALEOARTE + NOMES + ATRIBUTOS + CRÉDITO) --- */
+    function buildCardHtml(target, dino, interactive) {
       const attributes = [
         { key: 'weight', label: 'Peso', icon: '⚖️', value: dino.weight, unit: 'kg', displayVal: `${dino.weight >= 1000 ? (dino.weight / 1000).toLocaleString('pt-BR') + ' ton' : dino.weight + ' kg'}` },
         { key: 'length', label: 'Comprimento', icon: '📏', value: dino.length, unit: 'm', displayVal: `${dino.length} m` },
@@ -2041,7 +2164,7 @@
 
       let attributesHtml = '';
       attributes.forEach(attr => {
-        if (isPlayer && !isRoundResolved) {
+        if (interactive) {
           attributesHtml += `
             <button onclick="compareAttribute('${attr.key}')" class="w-full bg-white hover:bg-sage-100 border-2 border-sage-200 hover:border-sage-400 p-2.5 sm:p-3 rounded-2xl flex items-center justify-between gentle-transition active:scale-[0.98] shadow-xs group">
               <span class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
@@ -2068,15 +2191,15 @@
         }
       });
 
-      const superTrunfoBadge = dino.superTrunfo 
+      const superTrunfoBadge = dino.superTrunfo
         ? `<div class="bg-amber-400 text-amber-950 font-black text-[11px] px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-xs animate-bounce">
             ⭐ SUPER TRUNFO
            </div>`
         : '';
 
-      container.innerHTML = `
+      return `
         <div id="${target}-card-box" class="w-full ${dino.colorClass} border-2 rounded-3xl p-4 sm:p-5 flex flex-col gap-3 shadow-sm gentle-transition">
-          
+
           <!-- Cabeçalho da Carta -->
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -2086,14 +2209,15 @@
             ${superTrunfoBadge}
           </div>
 
-          <!-- Reconstituição Paleontológica Realista Fiel (Gatilho de Memória) -->
-          <div class="bg-white/80 rounded-2xl p-2.5 border border-current/15 flex flex-col gap-2 overflow-hidden shadow-2xs">
-            <div class="paleo-art-box cursor-pointer group" onclick="openImageZoom('${dino.id}')" title="Clique para ampliar os detalhes anatômicos da espécie">
+          <!-- Paleoarte da espécie (fundo branco de prancha científica) -->
+          <div class="bg-white rounded-2xl p-2.5 border border-current/15 flex flex-col gap-1.5 overflow-hidden shadow-2xs">
+            <div class="paleo-art-box cursor-pointer group bg-white" onclick="openImageZoom('${dino.id}')" title="Clique para ampliar a paleoarte da espécie">
               ${getSpeciesVisualHtml(dino, false)}
               <div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-xs px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-600 border border-slate-200 shadow-2xs flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
                 🔍 Ampliar
               </div>
             </div>
+            <p class="text-[9px] leading-tight text-slate-400 text-center px-1">Paleoarte: ${dino.artCredit || 'Wikimedia Commons'}</p>
 
             <!-- Nomes: Popular e Científico com Significado Etimológico -->
             <div class="text-center px-1">
@@ -2118,6 +2242,43 @@
       `;
     }
 
+    /* --- RENDERIZAÇÃO DA CARTA: A DO ROBÔ NASCE MONTADA COM VERSO À VISTA --- */
+    function renderCard(target, dino, isCovered) {
+      const container = document.getElementById(`${target}-card-container`);
+      const isPlayer = target === 'player';
+
+      if (target === 'cpu') {
+        container.innerHTML = `
+          <div class="flip-scene">
+            <div class="flip-inner" id="cpu-flip-inner">
+              <div class="flip-face flip-face-verso">${cardBackHtml('Robô Amigo')}</div>
+              <div class="flip-face flip-face-frente" aria-hidden="true">${buildCardHtml('cpu', dino, false)}</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = buildCardHtml('player', dino, isPlayer && !isRoundResolved);
+    }
+
+    /* --- VIRADA ANIMADA (GIRO NO EIXO VERTICAL, COMO A CARTA NA MESA) --- */
+    function revealCpuCard() {
+      const inner = document.getElementById('cpu-flip-inner');
+      if (!inner) return;
+      playCardFlipSound();
+      inner.classList.add('is-flipped');
+      const frente = inner.querySelector('.flip-face-frente');
+      if (frente) frente.setAttribute('aria-hidden', 'false');
+      setTimeout(() => {
+        const tag = document.getElementById('cpu-status-tag');
+        if (tag) {
+          tag.textContent = 'Carta revelada';
+          tag.className = "text-xs font-semibold text-sage-800 bg-sage-100 px-2 py-0.5 rounded-lg";
+        }
+      }, 420);
+    }
+
     /* --- LÓGICA DE COMPARAÇÃO DE ATRIBUTO --- */
     function compareAttribute(selectedKey) {
       if (isRoundResolved) return;
@@ -2125,8 +2286,10 @@
 
       playClickSound();
 
-      // Revela a carta do Robô
-      renderCard('cpu', currentCpuCard, false);
+      // Vira a carta do Robô com animação (efeito de baralho analógico)
+      revealCpuCard();
+      // Re-renderiza a carta do jogador sem botões para destacar o atributo comparado
+      renderCard('player', currentPlayerCard, false);
 
       let winner = null;
       let reasonText = "";

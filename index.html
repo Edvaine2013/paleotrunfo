@@ -790,7 +790,7 @@
         id: "2C",
         name: "Diplodoco",
         scientificName: "Diplodocus carnegii",
-        nameMeaning: "Dupla barra (ossos da cauda)",
+        nameMeaning: "Dupla viga (ossos da cauda)",
         group: "2",
         groupName: "Saurópodes Gigantes",
         colorClass: "bg-emerald-50 border-emerald-200 text-emerald-950",
@@ -844,7 +844,7 @@
         id: "3A",
         name: "Triceratops",
         scientificName: "Triceratops horridus",
-        nameMeaning: "Rosto com três chifres espantoso",
+        nameMeaning: "Rosto de três chifres (espécie horridus: de pele rugosa)",
         group: "3",
         groupName: "Ceratopsídeos",
         colorClass: "bg-amber-50 border-amber-200 text-amber-950",
@@ -1026,7 +1026,7 @@
         id: "4C",
         name: "Nodossauro",
         scientificName: "Nodosaurus textilis",
-        nameMeaning: "Lagarto nodoso tecido",
+        nameMeaning: "Lagarto nodoso de textura tecida",
         group: "4",
         groupName: "Armados & Blindados",
         colorClass: "bg-stone-50 border-stone-200 text-stone-950",
@@ -1083,7 +1083,7 @@
         id: "5A",
         name: "Parassaurolofo",
         scientificName: "Parasaurolophus walkeri",
-        nameMeaning: "Perto do lagarto de crista",
+        nameMeaning: "Quase lagarto de crista",
         group: "5",
         groupName: "Ornitópodes",
         colorClass: "bg-sky-50 border-sky-200 text-sky-950",
@@ -1263,7 +1263,7 @@
         id: "6D",
         name: "Dimorfodonte",
         scientificName: "Dimorphodon macronyx",
-        nameMeaning: "Dois tipos de dentes de garra grande",
+        nameMeaning: "Dois tipos de dentes, de garra grande",
         group: "6",
         groupName: "Pterossauros",
         colorClass: "bg-purple-50 border-purple-200 text-purple-950",
@@ -1316,7 +1316,7 @@
         id: "7B",
         name: "Plesiossauro",
         scientificName: "Plesiosaurus dolichodeirus",
-        nameMeaning: "Próximo a lagarto de pescoço longo",
+        nameMeaning: "Quase lagarto, de pescoço longo",
         group: "7",
         groupName: "Répteis Marinhos",
         colorClass: "bg-teal-50 border-teal-200 text-teal-950",
@@ -1614,7 +1614,7 @@
         id: "10A",
         name: "Dimetrodon",
         scientificName: "Dimetrodon grandis",
-        nameMeaning: "Dois tipos de dentes grande",
+        nameMeaning: "Dois tipos de dentes",
         group: "10",
         groupName: "Ancestrais Pré-Históricos",
         colorClass: "bg-yellow-50 border-yellow-200 text-yellow-950",
@@ -1692,7 +1692,7 @@
         id: "10D",
         name: "Desmatosuchus",
         scientificName: "Desmatosuchus spurensis",
-        nameMeaning: "Crocodilo de ligação de Spur",
+        nameMeaning: "Crocodilo de elos (desmos), de Spur",
         group: "10",
         groupName: "Ancestrais Pré-Históricos",
         colorClass: "bg-yellow-50 border-yellow-200 text-yellow-950",
@@ -1745,7 +1745,7 @@
         id: "11B",
         name: "Irritator",
         scientificName: "Irritator challengeri",
-        nameMeaning: "Irritante (pela restauração) de Challenger",
+        nameMeaning: "O irritante (pelo trabalho de preparação do fóssil), de Challenger",
         group: "11",
         groupName: "Fósseis Brasileiros",
         colorClass: "bg-lime-50 border-lime-200 text-lime-950",
@@ -1821,7 +1821,7 @@
         id: "12A",
         name: "Tigre-Dente-de-Sabre",
         scientificName: "Smilodon populator",
-        nameMeaning: "Dente de faca devastador",
+        nameMeaning: "Dente de cinzel devastador",
         group: "12",
         groupName: "Megafauna Cenozoica",
         colorClass: "bg-indigo-50 border-indigo-200 text-indigo-950",
@@ -2285,6 +2285,8 @@
       if (!inner) return;
       playCardFlipSound();
       inner.classList.add('is-flipped');
+      const verso = inner.querySelector('.flip-face-verso');
+      if (verso) verso.setAttribute('aria-hidden', 'true');
       const frente = inner.querySelector('.flip-face-frente');
       if (frente) frente.setAttribute('aria-hidden', 'false');
       setTimeout(() => {
